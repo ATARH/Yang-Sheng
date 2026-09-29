@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Продукция — ЯН-ШЕН Сочи</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --bg-main: #08090A; /* Графитовый фон */
+            --bg-card: #111315; /* Темно-серые карточки */
+            --border: rgba(255, 255, 255, 0.08);
+            --jade: #00A86B; /* Нефритовый */
+            --gold: #C5A059; /* Античное золото */
+            --ember: #FF3C00; /* Огонь / Инновация будущего */
+            --text-main: #F5F5F7; /* Белый текст */
+            --text-dim: #86868B;
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--bg-main); color: var(--text-main); font-family: 'Inter', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; padding-bottom: 60px; position: relative; }
+        h1, h2, h3, h4 { font-family: 'Unbounded', sans-serif; letter-spacing: -0.03em; line-height: 1; margin-bottom: 20px; }
+        p { color: var(--text-dim); line-height: 1.6; margin-bottom: 20px; font-size: 0.95rem; }
+        a { text-decoration: none; color: inherit; }
+        
+        /* Хедер */
+        header { position: fixed; top: 0; width: 100%; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(8, 9, 10, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+        header::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: repeating-linear-gradient(90deg, var(--ember) 0, var(--ember) 10px, transparent 10px, transparent 12px, var(--ember) 12px, var(--ember) 15px, transparent 15px, transparent 27px); opacity: 0.6; box-shadow: 0 0 10px var(--ember); }
+        .header-logo { display: flex; align-items: center; gap: 15px; font-family: 'Unbounded'; font-weight: 700; font-size: 1rem; color: var(--text-main); }
+        .header-logo-img { height: 40px; width: auto; filter: drop-shadow(0 0 8px rgba(0, 168, 107, 0.4)); }
+        nav ul { list-style: none; display: flex; gap: 20px; }
+        nav a { color: var(--text-dim); font-size: 0.85rem; font-weight: 500; transition: color 0.3s; }
+        nav a:hover { color: var(--ember); text-shadow: 0 0 8px var(--ember); }
+        .btn-header-phone { color: var(--gold); font-weight: 600; font-size: 0.9rem; }
+        .btn-primary { background: var(--ember); color: #fff; padding: 10px 20px; border-radius: 30px; font-weight: 600; font-size: 0.85rem; transition: all 0.3s; border: none; box-shadow: 0 0 15px rgba(255, 60, 0, 0.4); }
+        .btn-primary:hover { background: #fff; color: var(--ember); box-shadow: 0 0 25px var(--ember); }
+
+        /* Hero */
+        .page-hero { min-height: 40vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 40px 60px; position: relative; background: radial-gradient(circle at 50% 50%, rgba(255, 60, 0, 0.08) 0%, transparent 60%); }
+        .page-hero-content { position: relative; z-index: 10; max-width: 1000px; margin: 0 auto; text-align: center; }
+        .page-hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 300; color: var(--text-main); margin-bottom: 20px; text-shadow: 0 0 30px rgba(255, 255, 255, 0.2); }
+        .page-hero h1 span { font-weight: 700; color: var(--ember); text-shadow: 0 0 30px rgba(255, 60, 0, 0.6); }
+        .page-hero p { font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+        /* Сетка товаров */
+        section { padding: 60px 40px; max-width: 1200px; margin: 0 auto; }
+        .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        
+        /* Карточка товара */
+        .product-card { background: var(--bg-card); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: all 0.4s ease; border: 1px solid var(--border); display: flex; flex-direction: column; }
+        .product-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 25px rgba(255, 60, 0, 0.15); transform: translateY(-5px); border-color: var(--ember); }
+
+        /* Слайдер фото */
+        .product-slider { position: relative; width: 100%; height: 350px; background: radial-gradient(circle, #1A1A1D 0%, #050505 100%); overflow: hidden; }
+        .slider-track { display: flex; transition: transform 0.5s ease-in-out; height: 100%; }
+        .slider-track img { width: 100%; height: 100%; object-fit: contain; flex-shrink: 0; padding: 20px; }
+        
+        /* Стрелки слайдера */
+        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.1); width: 35px; height: 35px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; color: var(--text-main); transition: all 0.3s; display: flex; align-items: center; justify-content: center; opacity: 0; }
+        .product-card:hover .slider-btn { opacity: 1; }
+        .slider-btn:hover { background: var(--ember); color: #fff; border-color: var(--ember); box-shadow: 0 0 15px var(--ember); }
+        .prev-btn { left: 15px; } .next-btn { right: 15px; }
+
+        /* Информация о товаре */
+        .product-info { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .product-tag { font-size: 0.7rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: block; font-weight: 600; }
+        .product-info h4 { font-size: 1.1rem; margin-bottom: 15px; color: var(--text-main); line-height: 1.2; min-height: 40px; }
+
+        .price-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 15px; margin-top: auto; }
+        .price { font-family: 'Unbounded', sans-serif; font-size: 1.2rem; color: var(--text-main); font-weight: 600; }
+        .buy-btn { background: var(--ember); color: #fff; padding: 10px 20px; border-radius: 30px; cursor: pointer; font-size: 0.8rem; font-weight: 600; transition: all 0.3s; text-transform: uppercase; border: none; box-shadow: 0 0 10px rgba(255, 60, 0, 0.3); }
+        .buy-btn:hover { background: #fff; color: var(--ember); box-shadow: 0 0 20px var(--ember); }
+
+        /* Подвал */
+        footer { padding: 80px 40px 40px; border-top: 1px solid var(--border); background: #050505; position: relative; z-index: 5; }
+        footer::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: repeating-linear-gradient(90deg, var(--ember) 0, var(--ember) 10px, transparent 10px, transparent 12px, var(--ember) 12px, var(--ember) 15px, transparent 15px, transparent 27px); opacity: 0.6; box-shadow: 0 0 10px var(--ember); }
+        .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; max-width: 1200px; margin: 0 auto 60px; }
+        .footer-col h4 { font-family: 'Unbounded'; font-size: 1rem; margin-bottom: 20px; color: var(--text-main); }
+        .footer-col ul { list-style: none; } .footer-col li { margin-bottom: 10px; }
+        .footer-col a { color: var(--text-dim); font-size: 0.9rem; } .footer-col a:hover { color: var(--ember); }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 30px; display: flex; justify-content: space-between; color: #555; font-size: 0.8rem; }
+        .mobile-fixed-bar { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(8, 9, 10, 0.95); backdrop-filter: blur(10px); padding: 10px; border-top: 1px solid var(--border); z-index: 1001; }
+        .mobile-fixed-bar a { flex: 1; text-align: center; padding: 12px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; }
+        .mob-call { background: var(--glass); border: 1px solid var(--border); color: var(--text-main); margin-right: 10px; }
+        .mob-book { background: var(--ember); color: #fff; box-shadow: 0 0 15px rgba(255, 60, 0, 0.3); }
+        @media (max-width: 900px) { nav ul { display: none; } .products-grid { grid-template-columns: 1fr; } .mobile-fixed-bar { display: flex; } }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="header-logo">
+            <img src="logo.png" alt="Logo" class="header-logo-img">
+            ЯН-ШЕН
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="products.html" style="color: var(--ember); font-weight: 600; text-shadow: 0 0 8px var(--ember);">Продукция</a></li>
+                <li><a href="prices.html">Цены</a></li>
+                <li><a href="index.html#contacts">Контакты</a></li>
+            </ul>
+        </nav>
+        <div style="display: flex; gap: 20px; align-items: center;">
+            <a href="tel:+79881434998" class="btn-header-phone">+7 988 143 49 98</a>
+            <a href="https://wa.me/79881434998" target="_blank" class="btn-primary">Записаться</a>
+        </div>
+    </header>
+
+    <div class="page-hero">
+        <div class="page-hero-content">
+            <h1>Наша <span>Продукция</span></h1>
+            <p>Эксклюзивные эликсиры и косметика на основе древних рецептов и современных биотехнологий. Доставка по России.</p>
+        </div>
+    </div>
+
+    <section>
+        <div class="products-grid">
+            
+            <!-- Товар 1: FOHOW MEIGUI -->
+            <div class="product-card gsap-card">
+                <div class="product-slider">
+                    <div class="slider-track">
+                        <img src="https://z-cdn-media.chatglm.cn/files/4743b525-76d4-4641-b824-7d9918691b5d.jpg" alt="FOHOW MEIGUI 1">
+                        <img src="https://z-cdn-media.chatglm.cn/files/f77cce44-9931-4633-9516-c4ccc28ca39e.png" alt="FOHOW MEIGUI 2">
+                    </div>
+                    <button class="slider-btn prev-btn">‹</button>
+                    <button class="slider-btn next-btn">›</button>
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">Net Weight: 120G</span>
+                    <h4>FOHOW MEIGUI</h4>
+                    <div class="price-row">
+                        <div class="price">--- ₽</div>
+                        <a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20FOHOW%20MEIGUI" target="_blank" class="buy-btn">Купить</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Товар 2: Youth plus -->
+            <div class="product-card gsap-card">
+                <div class="product-slider">
+                    <div class="slider-track" style="transform: none;">
+                        <img src="https://z-cdn-media.chatglm.cn/files/e6c5a868-fc4e-4756-a514-a0091b97dba5.png" alt="Capsules Youth plus">
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">90 капсул · Food supplement</span>
+                    <h4>Capsules with peptides «Youth plus»</h4>
+                    <div class="price-row">
+                        <div class="price">--- ₽</div>
+                        <a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Youth%20plus" target="_blank" class="buy-btn">Купить</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Товар 3: FOHOW LIUWEI CHA -->
+            <div class="product-card gsap-card">
+                <div class="product-slider">
+                    <div class="slider-track">
+                        <img src="https://z-cdn-media.chatglm.cn/files/e799c3da-bd16-44a1-a9f5-773e277383b7.jpg" alt="FOHOW LIUWEI CHA 1">
+                        <img src="https://z-cdn-media.chatglm.cn/files/e2faa478-06fd-49a4-8c76-f461ad7fd8bc.jpg" alt="FOHOW LIUWEI CHA 2">
+                    </div>
+                    <button class="slider-btn prev-btn">‹</button>
+                    <button class="slider-btn next-btn">›</button>
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">2G</span>
+                    <h4>FOHOW LIUWEI CHA</h4>
+                    <div class="price-row">
+                        <div class="price">--- ₽</div>
+                        <a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20FOHOW%20LIUWEI%20CHA" target="_blank" class="buy-btn">Купить</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Товар 4: FOHOW HAICAO GAI -->
+            <div class="product-card gsap-card">
+                <div class="product-slider">
+                    <div class="slider-track" style="transform: none;">
+                        <img src="https://z-cdn-media.chatglm.cn/files/ca7bf0c3-8d74-45f1-ac3f-bd9f70176edf.jpg" alt="FOHOW HAICAO GAI">
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">80G · Food Supplement</span>
+                    <h4>FOHOW HAICAO GAI</h4>
+                    <div class="price-row">
+                        <div class="price">--- ₽</div>
+                        <a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20FOHOW%20HAICAO%20GAI" target="_blank" class="buy-btn">Купить</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Товар 5: FOHOW GAOQIAN -->
+            <div class="product-card gsap-card">
+                <div class="product-slider">
+                    <div class="slider-track" style="transform: none;">
+                        <img src="https://z-cdn-media.chatglm.cn/files/4ccda7f1-c4da-4b6b-8c61-01291c98d1d2.jpg" alt="FOHOW GAOQIAN">
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">Net Weight: 100.8G</span>
+                    <h4>FOHOW GAOQIAN</h4>
+                    <div class="price-row">
+                        <div class="price">--- ₽</div>
+                        <a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20FOHOW%20GAOQIAN" target="_blank" class="buy-btn">Купить</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col"><h4 style="color: var(--ember); text-shadow: 0 0 10px var(--ember);">ЯН-ШЕН</h4><p>«Возрождение из пепла»</p><p style="font-size: 0.9rem; margin-top: 10px;">Центр здоровья и восстановления</p><p style="font-size: 0.9rem;">Сочи, Навагинская, 9</p><a href="tel:+79881434998" style="color: var(--gold); font-size: 0.9rem;">+7 988 143 49 98</a></div>
+            <div class="footer-col"><h4>Навигация</h4><ul><li><a href="index.html">Главная</a></li><li><a href="products.html">Продукция</a></li><li><a href="bioenergy-massage.html">Услуги</a></li></ul></div>
+            <div class="footer-col"><h4>Информация</h4><ul><li><a href="prices.html">Цены</a></li><li><a href="sertifikat.html">Сертификаты</a></li></ul></div>
+        </div>
+        <div class="footer-bottom"><p>© 2026 ЯН-ШЕН. Все права защищены.</p><p>Искусство возрождения</p></div>
+    </footer>
+
+    <div class="mobile-fixed-bar"><a href="tel:+79881434998" class="mob-call">☎ Позвонить</a><a href="https://wa.me/79881434998" target="_blank" class="mob-book">Написать в WhatsApp</a></div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray(".gsap-card").forEach((el, i) => {
+            gsap.from(el, { opacity: 0, y: 60, duration: 0.8, delay: i * 0.1, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 90%" } });
+        });
+
+        // Логика слайдера
+        document.querySelectorAll('.product-slider').forEach(slider => {
+            const track = slider.querySelector('.slider-track');
+            const images = slider.querySelectorAll('.slider-track img');
+            if (images.length > 1) {
+                const prevBtn = slider.querySelector('.prev-btn');
+                const nextBtn = slider.querySelector('.next-btn');
+                let currentIndex = 0;
+                prevBtn.addEventListener('click', () => {
+                    currentIndex = (currentIndex === 0) ? images.length - 1 : currentIndex - 1;
+                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                });
+                nextBtn.addEventListener('click', () => {
+                    currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
+                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -11,21 +11,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
         :root {
-            --bg-main: #08090A; /* Графитовый фон */
-            --bg-card: #111315; /* Темно-серые карточки */
-            --border: rgba(255, 255, 255, 0.08);
-            --jade: #00A86B; /* Нефритовый */
-            --gold: #C5A059; /* Античное золото */
-            --ember: #FF3C00; /* Огонь / Инновация будущего */
-            --text-main: #F5F5F7; /* Белый текст */
-            --text-dim: #86868B;
-            --glass: rgba(255, 255, 255, 0.03);
+            --bg-main: #08090A; --bg-card: #111315; --border: rgba(255, 255, 255, 0.08);
+            --jade: #00A86B; --gold: #C5A059; --ember: #FF3C00;
+            --text-main: #F5F5F7; --text-dim: #86868B; --glass: rgba(255, 255, 255, 0.03);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body { background-color: var(--bg-main); color: var(--text-main); font-family: 'Inter', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; padding-bottom: 60px; position: relative; }
-        h1, h2, h3, h4 { font-family: 'Unbounded', sans-serif; letter-spacing: -0.03em; line-height: 1; margin-bottom: 20px; }
-        p { color: var(--text-dim); line-height: 1.6; margin-bottom: 20px; font-size: 0.95rem; }
+        h1, h2, h3, h4 { font-family: 'Unbounded', sans-serif; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 20px; }
+        p { color: var(--text-dim); line-height: 1.6; margin-bottom: 20px; font-size: 0.9rem; }
         a { text-decoration: none; color: inherit; }
         
         /* Хедер */
@@ -47,40 +41,40 @@
         .page-hero h1 span { font-weight: 700; color: var(--ember); text-shadow: 0 0 30px rgba(255, 60, 0, 0.6); }
         .page-hero p { font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
 
-        /* Сетка товаров */
+        /* Секции и категории */
         section { padding: 60px 40px; max-width: 1200px; margin: 0 auto; }
+        .category-block { margin-bottom: 60px; }
+        .category-title { font-family: 'Unbounded'; font-size: 1.5rem; color: var(--gold); margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid var(--border); padding-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .category-title span { font-size: 0.8rem; color: var(--text-dim); font-weight: 400; font-family: 'Noto Serif SC'; }
+        
         .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         
         /* Карточка товара */
         .product-card { background: var(--bg-card); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: all 0.4s ease; border: 1px solid var(--border); display: flex; flex-direction: column; }
         .product-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 25px rgba(255, 60, 0, 0.15); transform: translateY(-5px); border-color: var(--ember); }
 
-        /* Слайдер фото */
-        .product-slider { position: relative; width: 100%; height: 350px; background: radial-gradient(circle, #1A1A1D 0%, #050505 100%); overflow: hidden; }
-        .slider-track { display: flex; transition: transform 0.5s ease-in-out; height: 100%; }
+        /* Слайдер фото (Плейсхолдер) */
+        .product-slider { position: relative; width: 100%; height: 300px; background: radial-gradient(circle, #1A1A1D 0%, #050505 100%); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .img-placeholder { color: var(--text-dim); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.5; }
+        .slider-track { display: flex; transition: transform 0.5s ease-in-out; height: 100%; width: 100%; }
         .slider-track img { width: 100%; height: 100%; object-fit: contain; flex-shrink: 0; padding: 20px; }
-        
-        /* Стрелки слайдера */
-        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.1); width: 35px; height: 35px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; color: var(--text-main); transition: all 0.3s; display: flex; align-items: center; justify-content: center; opacity: 0; }
-        .product-card:hover .slider-btn { opacity: 1; }
-        .slider-btn:hover { background: var(--ember); color: #fff; border-color: var(--ember); box-shadow: 0 0 15px var(--ember); }
-        .prev-btn { left: 15px; } .next-btn { right: 15px; }
 
         /* Информация о товаре */
         .product-info { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
-        .product-tag { font-size: 0.7rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: block; font-weight: 600; }
-        .product-info h4 { font-size: 1.1rem; margin-bottom: 15px; color: var(--text-main); line-height: 1.2; min-height: 40px; }
+        .product-tag { font-size: 0.65rem; color: var(--jade); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: block; font-weight: 600; }
+        .product-info h4 { font-size: 1.1rem; margin-bottom: 15px; color: var(--text-main); line-height: 1.2; }
+        .product-info p { font-size: 0.8rem; margin-bottom: 20px; flex-grow: 1; color: var(--text-dim); }
 
         .price-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 15px; margin-top: auto; }
-        .price { font-family: 'Unbounded', sans-serif; font-size: 1.2rem; color: var(--text-main); font-weight: 600; }
-        .buy-btn { background: var(--ember); color: #fff; padding: 10px 20px; border-radius: 30px; cursor: pointer; font-size: 0.8rem; font-weight: 600; transition: all 0.3s; text-transform: uppercase; border: none; box-shadow: 0 0 10px rgba(255, 60, 0, 0.3); }
+        .price { font-family: 'Unbounded', sans-serif; font-size: 1.1rem; color: var(--text-main); font-weight: 600; }
+        .buy-btn { background: var(--ember); color: #fff; padding: 8px 16px; border-radius: 30px; cursor: pointer; font-size: 0.75rem; font-weight: 600; transition: all 0.3s; text-transform: uppercase; border: none; box-shadow: 0 0 10px rgba(255, 60, 0, 0.3); }
         .buy-btn:hover { background: #fff; color: var(--ember); box-shadow: 0 0 20px var(--ember); }
 
         /* Подвал */
         footer { padding: 80px 40px 40px; border-top: 1px solid var(--border); background: #050505; position: relative; z-index: 5; }
         footer::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: repeating-linear-gradient(90deg, var(--ember) 0, var(--ember) 10px, transparent 10px, transparent 12px, var(--ember) 12px, var(--ember) 15px, transparent 15px, transparent 27px); opacity: 0.6; box-shadow: 0 0 10px var(--ember); }
         .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; max-width: 1200px; margin: 0 auto 60px; }
-        .footer-col h4 { font-family: 'Unbounded'; font-size: 1rem; margin-bottom: 20px; color: var(--text-main); }
+        .footer-col h4 { font-family: 'Unbounded'; font-size: 1rem; margin-bottom: 20px; color: var(--ember); text-shadow: 0 0 10px var(--ember); }
         .footer-col ul { list-style: none; } .footer-col li { margin-bottom: 10px; }
         .footer-col a { color: var(--text-dim); font-size: 0.9rem; } .footer-col a:hover { color: var(--ember); }
         .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 30px; display: flex; justify-content: space-between; color: #555; font-size: 0.8rem; }
@@ -100,7 +94,7 @@
         <nav>
             <ul>
                 <li><a href="index.html">Главная</a></li>
-                <li><a href="products.html" style="color: var(--ember); font-weight: 600; text-shadow: 0 0 8px var(--ember);">Продукция</a></li>
+                <li><a href="products.html" style="color: var(--ember); text-shadow: 0 0 8px var(--ember);">Продукция</a></li>
                 <li><a href="prices.html">Цены</a></li>
                 <li><a href="index.html#contacts">Контакты</a></li>
             </ul>
@@ -119,105 +113,376 @@
     </div>
 
     <section>
-        <div class="products-grid">
-            
-            <!-- Товар 1: FOHOW MEIGUI -->
-            <div class="product-card gsap-card">
-                <div class="product-slider">
-                    <div class="slider-track">
-                        <img src="https://z-cdn-media.chatglm.cn/files/4743b525-76d4-4641-b824-7d9918691b5d.jpg" alt="FOHOW MEIGUI 1">
-                        <img src="https://z-cdn-media.chatglm.cn/files/f77cce44-9931-4633-9516-c4ccc28ca39e.png" alt="FOHOW MEIGUI 2">
-                    </div>
-                    <button class="slider-btn prev-btn">‹</button>
-                    <button class="slider-btn next-btn">›</button>
-                </div>
-                <div class="product-info">
-                    <span class="product-tag">Net Weight: 120G</span>
-                    <h4>FOHOW MEIGUI</h4>
-                    <div class="price-row">
-                        <div class="price">--- ₽</div>
-                        <a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20FOHOW%20MEIGUI" target="_blank" class="buy-btn">Купить</a>
+        <!-- СЕРИЯ ГАРМОНИЗАЦИЯ -->
+        <div class="category-block">
+            <div class="category-title">Серия Гармонизация <span>和系列</span></div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Гармонизация</span>
+                        <h4>Эликсир «Феникс»</h4>
+                        <p>Создан академиком Тан Ючжи на основе учения о балансе инь-ян и взаимосвязях у-син. Равномерно регулирует функции организма и укрепляет иммунитет. Сочетает классические идеи Ян-Шэн и передовые технологии.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Эликсир%20Феникс" target="_blank" class="buy-btn">Купить</a></div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Товар 2: Youth plus -->
-            <div class="product-card gsap-card">
-                <div class="product-slider">
-                    <div class="slider-track" style="transform: none;">
-                        <img src="https://z-cdn-media.chatglm.cn/files/e6c5a868-fc4e-4756-a514-a0091b97dba5.png" alt="Capsules Youth plus">
-                    </div>
-                </div>
-                <div class="product-info">
-                    <span class="product-tag">90 капсул · Food supplement</span>
-                    <h4>Capsules with peptides «Youth plus»</h4>
-                    <div class="price-row">
-                        <div class="price">--- ₽</div>
-                        <a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Youth%20plus" target="_blank" class="buy-btn">Купить</a>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Гармонизация</span>
+                        <h4>Капсулы «Линчжи»</h4>
+                        <p>Легенда бессмертия. Созданы на основе "Трех принципов Ян-Шэн". Достигнуто оптимальное сочетание линчжи и кордицепса. Оптимальный продукт для заботы о здоровье головного мозга, питает цзин, ци и шэнь.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Капсулы%20Линчжи" target="_blank" class="buy-btn">Купить</a></div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Товар 3: FOHOW LIUWEI CHA -->
-            <div class="product-card gsap-card">
-                <div class="product-slider">
-                    <div class="slider-track">
-                        <img src="https://z-cdn-media.chatglm.cn/files/e799c3da-bd16-44a1-a9f5-773e277383b7.jpg" alt="FOHOW LIUWEI CHA 1">
-                        <img src="https://z-cdn-media.chatglm.cn/files/e2faa478-06fd-49a4-8c76-f461ad7fd8bc.jpg" alt="FOHOW LIUWEI CHA 2">
+        <!-- СЕРИЯ ОЧИСТКА -->
+        <div class="category-block">
+            <div class="category-title">Серия Очистка <span>清系列</span></div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Очистка</span>
+                        <h4>Эликсир «Саньцин»</h4>
+                        <p>Очищение организма изнутри. Позволяет очищать в трех аспектах: кишечник, выведение токсинов, устранение липидов в крови. Дает очищение без ослабленности. Абсолютно натуральный продукт высшего качества.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Эликсир%20Саньцин" target="_blank" class="buy-btn">Купить</a></div>
                     </div>
-                    <button class="slider-btn prev-btn">‹</button>
-                    <button class="slider-btn next-btn">›</button>
                 </div>
-                <div class="product-info">
-                    <span class="product-tag">2G</span>
-                    <h4>FOHOW LIUWEI CHA</h4>
-                    <div class="price-row">
-                        <div class="price">--- ₽</div>
-                        <a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20FOHOW%20LIUWEI%20CHA" target="_blank" class="buy-btn">Купить</a>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Очистка</span>
+                        <h4>Фруктовая паста «Роза Феникс»</h4>
+                        <p>Залог вечной молодости кишечника. Разработана на основе секретов долгожителей Бама. Сдерживает патогенную микрофлору, регулирует диарею и запор, укрепляет иммунитет, оказывает косметический эффект.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Паста%20Роза%20Феникс" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Очистка</span>
+                        <h4>Питательные пастилки «Гаосен»</h4>
+                        <p>Комплекс питательных веществ для стройности. Оказывает очищающее и восстанавливающее действие. Подходит для людей с лишним весом, "трех гипер" и желающим сохранить стройность.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Пастилки%20Гаосен" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Очистка</span>
+                        <h4>Чай «Лювей»</h4>
+                        <p>Хороший чай приносит здоровье. В состав входят 6 ценных компонентов: шу пуэр, астрагал, шалфей, гиностемма, хризантема, жимолость. Отличный продукт для повседневного применения.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Чай%20Лювей" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Очистка</span>
+                        <h4>Растительный напиток «Fito-ChangQing»</h4>
+                        <p>Очищение кишечника с нулевым содержанием химических веществ. Ферменты желтого персика + 7 видов плодов. 13 видов штаммов бактерий. Мягкое очищение всего за 2 часа.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Fito-ChangQing" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Очистка</span>
+                        <h4>Растворимый напиток «Active ProBio»</h4>
+                        <p>13 видов запатентованных штаммов. Доставка 50 млрд живых бактерий в кишечник. Полная реконструкция микрофлоры, формирование конституционального типа для стройности.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Active%20ProBio%20напиток" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Очистка</span>
+                        <h4>Капсулы «Active ProBio»</h4>
+                        <p>2 ключевых штамма полезных бактерий. Стабильный результат надолго, ежедневная забота о здоровье кишечника. Попрощайтесь с запором!</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Active%20ProBio%20капсулы" target="_blank" class="buy-btn">Купить</a></div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Товар 4: FOHOW HAICAO GAI -->
-            <div class="product-card gsap-card">
-                <div class="product-slider">
-                    <div class="slider-track" style="transform: none;">
-                        <img src="https://z-cdn-media.chatglm.cn/files/ca7bf0c3-8d74-45f1-ac3f-bd9f70176edf.jpg" alt="FOHOW HAICAO GAI">
+        <!-- СЕРИЯ РАСТВОРЕНИЕ -->
+        <div class="category-block">
+            <div class="category-title">Серия Растворение <span>化系列</span></div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Растворение</span>
+                        <h4>Капсулы «Сюэчинфу»</h4>
+                        <p>Кристальное сердце. Содержат экстракты бобов натто, виноградной косточки и гиностеммы. Снижают липиды, делают сосуды эластичными, мощный антиоксидант, замедляют старение.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Капсулы%20Сюэчинфу" target="_blank" class="buy-btn">Купить</a></div>
                     </div>
                 </div>
-                <div class="product-info">
-                    <span class="product-tag">80G · Food Supplement</span>
-                    <h4>FOHOW HAICAO GAI</h4>
-                    <div class="price-row">
-                        <div class="price">--- ₽</div>
-                        <a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20FOHOW%20HAICAO%20GAI" target="_blank" class="buy-btn">Купить</a>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Растворение</span>
+                        <h4>Капсулы с чесночной эссенцией «Тасуан»</h4>
+                        <p>Природный антибиотик. Высококачественная чесночная эссенция (аллицин). Оказывает бактериостатическое действие, снижает уровень липидов и сахара.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Капсулы%20Тасуан" target="_blank" class="buy-btn">Купить</a></div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Товар 5: FOHOW GAOQIAN -->
-            <div class="product-card gsap-card">
-                <div class="product-slider">
-                    <div class="slider-track" style="transform: none;">
-                        <img src="https://z-cdn-media.chatglm.cn/files/4ccda7f1-c4da-4b6b-8c61-01291c98d1d2.jpg" alt="FOHOW GAOQIAN">
+        <!-- СЕРИЯ ВОССТАНОВЛЕНИЕ -->
+        <div class="category-block">
+            <div class="category-title">Серия Восстановление <span>补系列</span></div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Восстановление</span>
+                        <h4>Эликсир «Три драгоценности»</h4>
+                        <p>Сияние судьбы. Создан на основе эликсира "Феникс" с добавлением экстракта черных горных муравьев. Натуральный продукт, богатый питательными веществами.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Эликсир%20Три%20драгоценности" target="_blank" class="buy-btn">Купить</a></div>
                     </div>
                 </div>
-                <div class="product-info">
-                    <span class="product-tag">Net Weight: 100.8G</span>
-                    <h4>FOHOW GAOQIAN</h4>
-                    <div class="price-row">
-                        <div class="price">--- ₽</div>
-                        <a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20FOHOW%20GAOQIAN" target="_blank" class="buy-btn">Купить</a>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Восстановление</span>
+                        <h4>Мягкие капсулы «Хайцаогай»</h4>
+                        <p>Растительный кальций. Легкое усвоение, максимальная безопасность. Производится из морских водорослей по запатентованной технологии. Высокое содержание и полноценное усвоение.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Хайцаогай" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Восстановление</span>
+                        <h4>Растворимый напиток «SlimPower»</h4>
+                        <p>Снижение веса без чувства слабости. Обогащен экстрактами кодонопсиса, астрагала, дендробиума. Насыщает питательными веществами, дает чувство сытости, контролирует калорийность.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20SlimPower" target="_blank" class="buy-btn">Купить</a></div>
                     </div>
                 </div>
             </div>
+        </div>
 
+        <!-- СЕРИЯ РЕГЕНЕРАЦИЯ -->
+        <div class="category-block">
+            <div class="category-title">Серия Регенерация <span>生系列</span></div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Регенерация</span>
+                        <h4>Капсулы с пептидами «Молодость Плюс»</h4>
+                        <p>Полное обновление организма. Улучшает качество сна, снимает усталость, укрепляет иммунитет. Рекомендован при хронических заболеваниях. Применение: 2 раза в день по 3 капсулы.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Молодость%20Плюс" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Регенерация</span>
+                        <h4>Пастилки с пептидами «Движение плюс»</h4>
+                        <p>На страже здоровья ваших суставов. Уменьшает воспаления, защищает и восстанавливает суставы. Рекомендован при суставных заболеваниях и спортсменам. Применение: 2 раза в день по 2 капсулы.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Движение%20Плюс" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- КОМПЛЕКСЫ -->
+        <div class="category-block">
+            <div class="category-title">Оздоровительные комплексы <span>套装系列</span></div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Комплекс</span>
+                        <h4>Для продления молодости</h4>
+                        <p>Перечень: капсулы «Молодость Плюс», эликсир «Феникс», капсулы «Линчжи». Сочетать с сеансами БЭМ (базовое открытие спины) и сеансами РЭМ.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Комплекс%20продления%20молодости" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Комплекс</span>
+                        <h4>Комплекс для похудения</h4>
+                        <p>Шаг 1: Очистка (Fito-ChangQing). Шаг 2: Регуляция (SlimPower). Шаг 3: Восстановление (Active ProBio). Инновационный метод "системной регуляции".</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Комплекс%20для%20похудения" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Комплекс</span>
+                        <h4>Для дыхательной системы</h4>
+                        <p>Перечень: «Молодость Плюс», эликсир «Саньцин», «Линчжи», кальций «Хайцаогай», чай «Лювей». Сочетать с сеансами БЭМ и РЭМ.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Комплекс%20для%20дыхательной%20системы" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Комплекс</span>
+                        <h4>Для защиты сердца и мозга</h4>
+                        <p>Перечень: «Молодость Плюс», «Сюэчинфу», «Линчжи», «Хайцаогай», чай «Лювей». Сочетать с сеансами БЭМ (регуляция гипертонии) и РЭМ.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Комплекс%20для%20сердца%20и%20мозга" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Комплекс</span>
+                        <h4>Для нормализации сахара</h4>
+                        <p>Перечень: «Сюэчинфу», «Три драгоценности», «Молодость Плюс», «Хайцаогай», чай «Шуньци». Сочетать с сеансами БЭМ (регуляция сахара) и РЭМ.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Комплекс%20нормализации%20сахара" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Комплекс</span>
+                        <h4>Для печени и желчного пузыря</h4>
+                        <p>Перечень: эликсир «Саньцин», «Сюэчинфу», «Молодость Плюс», «Линчжи», чай «Лювей». Сочетать с сеансами БЭМ (регуляция печени) и РЭМ.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Комплекс%20для%20печени" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Комплекс</span>
+                        <h4>Для укрепления почек</h4>
+                        <p>Перечень: «Молодность Плюс», эликсир «Саньцин», «Линчжи». Сочетать с сеансами БЭМ (регуляция функции почек) и РЭМ.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Комплекс%20для%20почек" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Комплекс</span>
+                        <h4>Для предстательной железы</h4>
+                        <p>Перечень: «Сюэчинфу», «Три драгоценности», «Молодость Плюс», «Линчжи». Сочетать с сеансами БЭМ (регуляция предстательной железы) и РЭМ.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Комплекс%20для%20предстательной%20железы" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Комплекс</span>
+                        <h4>Для женщин</h4>
+                        <p>Перечень: «Саньцин», «Три драгоценности», «Молодость Плюс», «Хайцаогай», тампоны «Гуйфэй Бао». Сочетать с БЭМ (регуляция гинекологии) и РЭМ.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Комплекс%20для%20женщин" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Комплекс</span>
+                        <h4>Для восполнения энергии ци и крови</h4>
+                        <p>Перечень: «Молодость Плюс», «Три драгоценности», эликсир «Феникс», «Хайцаогай». Сочетать с сеансами БЭМ (базовое открытие спины) и РЭМ.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Комплекс%20ци%20и%20крови" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Комплекс</span>
+                        <h4>Для опорно-двигательного аппарата</h4>
+                        <p>Перечень: «Движение Плюс», «Молодость Плюс», «Три драгоценности», «Хайцаогай», Энергетический бальзам. Сочетать с БЭМ (продвинутый уровень) и РЭМ.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Комплекс%20для%20суставов" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Комплекс</span>
+                        <h4>Для желудка и кишечника</h4>
+                        <p>Перечень: эликсир «Феникс», «Саньцин», паста «Роза», «Линчжи», чай «Лювей». Сочетать с сеансами БЭМ (регуляция ЖКТ) и РЭМ.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Комплекс%20для%20ЖКТ" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Комплекс</span>
+                        <h4>Для коррекции фигуры</h4>
+                        <p>Перечень: «Саньцин», «Сюэчинфу», паста «Роза», «Гаосен», эликсир «Феникс». Сочетать с сеансами БЭМ (коррекция фигуры) и РЭМ.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Комплекс%20коррекции%20фигуры" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Комплекс</span>
+                        <h4>Для нервной системы и сна</h4>
+                        <p>Перечень: эликсир «Феникс», «Линчжи», «Три драгоценности», «Хайцаогай». Сочетать с БЭМ (открытие спины + УЗ-насадка) и РЭМ.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Комплекс%20для%20сна" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Комплекс</span>
+                        <h4>Для свежести полости рта</h4>
+                        <p>Перечень: эликсир «Феникс», эликсир «Саньцин», капсулы «Линчжи», паста «Роза», чай «Лювей».</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Комплекс%20для%20полости%20рта" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Комплекс</span>
+                        <h4>Для укрепления иммунитета</h4>
+                        <p>Перечень: «Молодость Плюс», эликсир «Феникс», «Три драгоценности», эликсир «Саньцин». Сочетать с сеансами БЭМ и РЭМ.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Комплекс%20для%20иммунитета" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Комплекс</span>
+                        <h4>Для регуляции при сахарном диабете</h4>
+                        <p>Перечень: «Молодость Плюс», «Сюэчинфу», «Саньцин», «Линчжи», чай «Лювей». Сочетать с сеансами БЭМ (регуляция печени и почек) и РЭМ.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Комплекс%20при%20диабете" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Комплекс</span>
+                        <h4>Для психо-эмоционального состояния</h4>
+                        <p>Перечень: «Молодость Плюс», «Сюэчинфу», «Линчжи», «Хайцаогай». Сочетать с сеансами БЭМ (открытие спины + УЗ-насадка) и РЭМ.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Комплекс%20психо-эмоциональный" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Комплекс</span>
+                        <h4>Для баланса иммунной системы</h4>
+                        <p>Перечень: эликсир «Саньцин», «Сюэчинфу», «Линчжи», «Хайцаогай». Сочетать с сеансами БЭМ (базовое открытие спины) и РЭМ.</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Комплекс%20баланса%20иммунитета" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-info">
+                        <span class="product-tag">Комплекс</span>
+                        <h4>Для укрепления изначальной ци</h4>
+                        <p>Перечень: «Молодость Плюс», эликсир «Феникс», капсулы «Линчжи», чай «Лювей».</p>
+                        <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Комплекс%20изначальной%20ци" target="_blank" class="buy-btn">Купить</a></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <footer>
         <div class="footer-content">
-            <div class="footer-col"><h4 style="color: var(--ember); text-shadow: 0 0 10px var(--ember);">ЯН-ШЕН</h4><p>«Возрождение из пепла»</p><p style="font-size: 0.9rem; margin-top: 10px;">Центр здоровья и восстановления</p><p style="font-size: 0.9rem;">Сочи, Навагинская, 9</p><a href="tel:+79881434998" style="color: var(--gold); font-size: 0.9rem;">+7 988 143 49 98</a></div>
+            <div class="footer-col"><h4>ЯН-ШЕН</h4><p>«Возрождение из пепла»</p><p style="font-size: 0.9rem; margin-top: 10px;">Центр здоровья и восстановления</p><p style="font-size: 0.9rem;">Сочи, Навагинская, 9</p><a href="tel:+79881434998" style="color: var(--gold); font-size: 0.9rem;">+7 988 143 49 98</a></div>
             <div class="footer-col"><h4>Навигация</h4><ul><li><a href="index.html">Главная</a></li><li><a href="products.html">Продукция</a></li><li><a href="bioenergy-massage.html">Услуги</a></li></ul></div>
             <div class="footer-col"><h4>Информация</h4><ul><li><a href="prices.html">Цены</a></li><li><a href="sertifikat.html">Сертификаты</a></li></ul></div>
         </div>
@@ -228,27 +493,8 @@
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
-        gsap.utils.toArray(".gsap-card").forEach((el, i) => {
-            gsap.from(el, { opacity: 0, y: 60, duration: 0.8, delay: i * 0.1, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 90%" } });
-        });
-
-        // Логика слайдера
-        document.querySelectorAll('.product-slider').forEach(slider => {
-            const track = slider.querySelector('.slider-track');
-            const images = slider.querySelectorAll('.slider-track img');
-            if (images.length > 1) {
-                const prevBtn = slider.querySelector('.prev-btn');
-                const nextBtn = slider.querySelector('.next-btn');
-                let currentIndex = 0;
-                prevBtn.addEventListener('click', () => {
-                    currentIndex = (currentIndex === 0) ? images.length - 1 : currentIndex - 1;
-                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-                });
-                nextBtn.addEventListener('click', () => {
-                    currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
-                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-                });
-            }
+        gsap.utils.toArray(".product-card").forEach((el, i) => {
+            gsap.from(el, { opacity: 0, y: 40, duration: 0.6, delay: (i % 3) * 0.1, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 95%" } });
         });
     </script>
 </body>

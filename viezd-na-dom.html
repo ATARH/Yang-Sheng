@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выезд специалиста на дом — ЯН-ШЕН Сочи</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --bg-main: #050505; --bg-card: #0D0D0F; --border: rgba(255, 255, 255, 0.08);
+            --ember: #FF3C00; --jade: #00FF9D; --gold: #FFB627;
+            --text-main: #F5F5F7; --text-dim: #86868B; --glass: rgba(255, 255, 255, 0.03);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--bg-main); color: var(--text-main); font-family: 'Inter', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; padding-bottom: 60px; }
+        h1, h2, h3, h4 { font-family: 'Unbounded', sans-serif; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 20px; }
+        p { color: var(--text-dim); line-height: 1.6; margin-bottom: 20px; }
+        a { text-decoration: none; color: var(--text-main); }
+        .cn-text { font-family: 'Noto Serif SC', serif; }
+        
+        header { position: fixed; top: 0; width: 100%; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+        header::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: repeating-linear-gradient(90deg, var(--jade) 0, var(--jade) 10px, transparent 10px, transparent 12px, var(--jade) 12px, var(--jade) 15px, transparent 15px, transparent 27px); opacity: 0.3; }
+        .header-logo { display: flex; align-items: center; gap: 15px; font-family: 'Unbounded'; font-weight: 900; font-size: 1rem; background: linear-gradient(90deg, var(--jade), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        nav ul { list-style: none; display: flex; gap: 20px; }
+        nav a { color: var(--text-dim); font-size: 0.85rem; font-weight: 500; transition: color 0.3s; }
+        nav a:hover { color: var(--text-main); }
+        .btn-header-phone { color: var(--gold); font-weight: 600; font-size: 0.9rem; }
+        .btn-primary { background: var(--ember); color: #fff; padding: 10px 20px; border-radius: 30px; font-weight: 600; font-size: 0.85rem; transition: all 0.3s; }
+        .btn-primary:hover { background: #fff; color: var(--ember); box-shadow: 0 0 20px var(--ember); }
+
+        .page-hero { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 40px 60px; position: relative; overflow: hidden; background: radial-gradient(circle at 80% 20%, rgba(255, 60, 0, 0.1) 0%, transparent 50%); }
+        .hero-bg-char { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 40vw; color: rgba(255, 255, 255, 0.02); font-family: 'Noto Serif SC'; font-weight: 700; z-index: 0; pointer-events: none; }
+        .page-hero-content { position: relative; z-index: 10; max-width: 1000px; }
+        .page-hero h1 { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900; margin-bottom: 20px; }
+        .gradient-text-fire { background: linear-gradient(180deg, #FFFFFF 0%, var(--ember) 150%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .price-badge { display: inline-block; background: var(--bg-card); border: 1px solid var(--ember); color: var(--ember); padding: 10px 25px; border-radius: 30px; font-weight: 600; margin-bottom: 30px; }
+        .btn-lg { padding: 18px 40px; border-radius: 50px; font-weight: 600; font-size: 1rem; transition: all 0.3s; border: 1px solid transparent; cursor: pointer; text-align: center; }
+        .btn-fire { background: var(--ember); color: #fff; } .btn-fire:hover { box-shadow: 0 0 30px var(--ember); transform: translateY(-3px); }
+
+        section { padding: 80px 40px; max-width: 1000px; margin: 0 auto; position: relative; }
+        .content-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 40px; margin-bottom: 40px; }
+        .content-block h2 { font-size: 2rem; margin-bottom: 20px; border-bottom: 2px solid var(--ember); display: inline-block; padding-bottom: 10px; }
+        .list-check { list-style: none; margin-top: 20px; }
+        .list-check li { padding-left: 25px; position: relative; margin-bottom: 15px; color: var(--text-dim); }
+        .list-check li::before { content: '✓'; position: absolute; left: 0; color: var(--ember); font-weight: bold; }
+
+        .booking-form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; background: var(--bg-card); padding: 40px; border-radius: 20px; border: 1px solid var(--border); }
+        .booking-form h2 { grid-column: span 2; color: var(--text-main); }
+        .form-group { display: flex; flex-direction: column; gap: 5px; }
+        .form-group label { font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; }
+        .form-group input, .form-group select, .form-group textarea { background: var(--bg-main); border: 1px solid var(--border); padding: 12px; border-radius: 8px; color: var(--text-main); font-family: 'Inter'; outline: none; }
+        .form-group input:focus, .form-group select:focus { border-color: var(--ember); }
+        .btn-submit { grid-column: span 2; background: var(--ember); color: #fff; padding: 15px; border: none; border-radius: 8px; font-weight: 600; text-transform: uppercase; cursor: pointer; font-size: 1rem; transition: all 0.3s; }
+        .btn-submit:hover { background: #fff; color: var(--ember); }
+
+        footer { padding: 80px 40px 40px; border-top: 1px solid var(--border); background: #030303; position: relative; z-index: 5; }
+        .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; max-width: 1200px; margin: 0 auto 60px; }
+        .footer-col h4 { font-family: 'Unbounded'; font-size: 1rem; margin-bottom: 20px; }
+        .footer-col ul { list-style: none; } .footer-col li { margin-bottom: 10px; }
+        .footer-col a { color: var(--text-dim); font-size: 0.9rem; } .footer-col a:hover { color: var(--text-main); }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 30px; display: flex; justify-content: space-between; color: #555; font-size: 0.8rem; }
+        .mobile-fixed-bar { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(10px); padding: 10px; border-top: 1px solid var(--border); z-index: 1001; }
+        .mobile-fixed-bar a { flex: 1; text-align: center; padding: 12px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; }
+        .mob-call { background: var(--glass); border: 1px solid var(--border); color: var(--text-main); margin-right: 10px; }
+        .mob-book { background: var(--ember); color: #fff; }
+        @media (max-width: 900px) { nav ul { display: none; } .booking-form { grid-template-columns: 1fr; } .booking-form h2, .btn-submit { grid-column: span 1; } .mobile-fixed-bar { display: flex; } }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="header-logo">
+            <svg width="30" height="30" viewBox="0 0 100 100"><defs><linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00FF9D"/><stop offset="100%" stop-color="#00A86B"/></linearGradient></defs><circle cx="50" cy="50" r="46" fill="none" stroke="url(#g1)" stroke-width="2"/><path d="M35,50 C35,35 50,35 50,50 C50,65 65,65 65,50 C65,35 50,35 50,50 C50,65 35,65 35,50 Z" fill="none" stroke="url(#g1)" stroke-width="4"/></svg>
+            ЯН-ШЕН
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="bioenergy-massage.html">Массаж FOHOW</a></li>
+                <li><a href="tim-fohow.html">Капсула TIM</a></li>
+                <li><a href="prices.html">Цены</a></li>
+            </ul>
+        </nav>
+        <div style="display: flex; gap: 20px; align-items: center;">
+            <a href="tel:+79881434998" class="btn-header-phone">+7 988 143 49 98</a>
+            <a href="#booking" class="btn-primary">Записаться</a>
+        </div>
+    </header>
+
+    <div class="page-hero">
+        <div class="hero-bg-char cn-text">家</div>
+        <div class="page-hero-content">
+            <h1 class="gradient-text-fire">Выезд специалиста</h1>
+            <p style="font-size: 1.2rem; color: var(--text-dim); max-width: 600px;">Специалист приедет к вам домой или в отель с портативным оборудованием.</p>
+            <div class="price-badge">Выезд — от +1 120 ₽</div>
+            <br>
+            <a href="#booking" class="btn-lg btn-fire">ЗАКАЗАТЬ ВЫЕЗД</a>
+        </div>
+    </div>
+
+    <section>
+        <div class="content-block gsap-reveal">
+            <h2>Как это работает</h2>
+            <p>Выезд специалиста — это максимальный комфорт для вас. Не нужно никуда ехать, мы привезем все необходимое оборудование прямо к вам.</p>
+            <ul class="list-check">
+                <li>Оформление заявки по телефону или через форму на сайте.</li>
+                <li>Согласование времени, адреса и выбора процедуры.</li>
+                <li>Прибытие специалиста со всем необходимым оборудованием.</li>
+                <li>Проведение процедуры в комфортной для вас обстановке.</li>
+            </ul>
+        </div>
+
+        <div class="content-block gsap-reveal">
+            <h2>Доступные процедуры</h2>
+            <p>На дом доступны следующие виды услуг:</p>
+            <ul class="list-check">
+                <li>Биоэнергетический массаж FOHOW.</li>
+                <li>Массаж лица FOHOW.</li>
+                <li>Остеопатия (сеанс).</li>
+            </ul>
+            <p style="margin-top: 20px; font-size: 0.9rem;"><strong>Важно:</strong> Стоимость выезда зависит от удаленности вашего адреса от центра Сочи (ул. Навагинская, 9).</p>
+        </div>
+
+        <div id="booking" class="booking-form gsap-reveal">
+            <h2>Заявка на выезд</h2>
+            <div class="form-group"><label>Ваше имя</label><input type="text" placeholder="Иван"></div>
+            <div class="form-group"><label>Телефон</label><input type="tel" placeholder="+7 (___) ___-__-__"></div>
+            <div class="form-group" style="grid-column: span 2;"><label>Выберите услугу</label><select><option>Биоэнергомассаж + Выезд</option><option>Массаж лица + Выезд</option><option>Остеопатия + Выезд</option></select></div>
+            <div class="form-group" style="grid-column: span 2;"><label>Адрес (район/улица)</label><input type="text" placeholder="г. Сочи, ул. ..."></div>
+            <div class="form-group"><label>Желаемая дата</label><input type="date"></div>
+            <div class="form-group"><label>Желаемое время</label><input type="time"></div>
+            <button type="button" class="btn-submit">ОТПРАВИТЬ ЗАЯВКУ</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col"><h4 class="gradient-text-fire">ЯН-ШЕН</h4><p>«Возрождение из пепла»</p><p style="font-size: 0.9rem; margin-top: 10px;">Центр здоровья и восстановления</p><p style="font-size: 0.9rem;">Сочи, Навагинская, 9</p><a href="tel:+79881434998" style="color: var(--gold); font-size: 0.9rem;">+7 988 143 49 98</a></div>
+            <div class="footer-col"><h4>Навигация</h4><ul><li><a href="index.html">Главная</a></li><li><a href="bioenergy-massage.html">Массаж FOHOW</a></li><li><a href="tim-fohow.html">Капсула TIM</a></li><li><a href="prices.html">Цены</a></li></ul></div>
+            <div class="footer-col"><h4>Информация</h4><ul><li><a href="#">FAQ</a></li><li><a href="#">Акции</a></li><li><a href="#">Контакты</a></li></ul></div>
+        </div>
+        <div class="footer-bottom"><p>© 2026 ЯН-ШЕН. Все права защищены.</p><p>Искусство возрождения</p></div>
+    </footer>
+
+    <div class="mobile-fixed-bar"><a href="tel:+79881434998" class="mob-call">☎ Позвонить</a><a href="#booking" class="mob-book">Записаться</a></div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray(".gsap-reveal").forEach(el => {
+            gsap.from(el, { opacity: 0, y: 50, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 85%" } });
+        });
+    </script>
+</body>
+</html>

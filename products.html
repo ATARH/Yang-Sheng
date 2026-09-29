@@ -41,7 +41,7 @@
         .page-hero h1 span { font-weight: 700; color: var(--ember); text-shadow: 0 0 30px rgba(255, 60, 0, 0.6); }
         .page-hero p { font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
 
-        /* Секции и категории */
+        /* Секции */
         section { padding: 60px 40px; max-width: 1200px; margin: 0 auto; }
         .category-block { margin-bottom: 60px; }
         .category-title { font-family: 'Unbounded'; font-size: 1.5rem; color: var(--gold); margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid var(--border); padding-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
@@ -53,13 +53,12 @@
         .product-card { background: var(--bg-card); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: all 0.4s ease; border: 1px solid var(--border); display: flex; flex-direction: column; }
         .product-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 25px rgba(255, 60, 0, 0.15); transform: translateY(-5px); border-color: var(--ember); }
 
-        /* Слайдер фото (Плейсхолдер) */
-        .product-slider { position: relative; width: 100%; height: 300px; background: radial-gradient(circle, #1A1A1D 0%, #050505 100%); overflow: hidden; display: flex; align-items: center; justify-content: center; }
-        .img-placeholder { color: var(--text-dim); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.5; }
-        .slider-track { display: flex; transition: transform 0.5s ease-in-out; height: 100%; width: 100%; }
-        .slider-track img { width: 100%; height: 100%; object-fit: contain; flex-shrink: 0; padding: 20px; }
+        /* Контейнер для PNG фото */
+        .product-img-wrap { width: 100%; height: 300px; background: radial-gradient(circle, #1A1A1D 0%, #050505 100%); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .product-img { max-width: 75%; max-height: 75%; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8)); transition: transform 0.5s; }
+        .product-card:hover .product-img { transform: scale(1.1); }
 
-        /* Информация о товаре */
+        /* Информация */
         .product-info { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
         .product-tag { font-size: 0.65rem; color: var(--jade); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: block; font-weight: 600; }
         .product-info h4 { font-size: 1.1rem; margin-bottom: 15px; color: var(--text-main); line-height: 1.2; }
@@ -118,7 +117,7 @@
             <div class="category-title">Серия Гармонизация <span>和系列</span></div>
             <div class="products-grid">
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/feniks.png" alt="Эликсир Феникс" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Гармонизация</span>
                         <h4>Эликсир «Феникс»</h4>
@@ -127,7 +126,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/linchzhi.png" alt="Капсулы Линчжи" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Гармонизация</span>
                         <h4>Капсулы «Линчжи»</h4>
@@ -143,7 +142,7 @@
             <div class="category-title">Серия Очистка <span>清系列</span></div>
             <div class="products-grid">
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/sanqing.png" alt="Эликсир Саньцин" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Очистка</span>
                         <h4>Эликсир «Саньцин»</h4>
@@ -152,7 +151,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/roza-feniks.png" alt="Паста Роза Феникс" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Очистка</span>
                         <h4>Фруктовая паста «Роза Феникс»</h4>
@@ -161,7 +160,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/gaosen.png" alt="Пастилки Гаосен" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Очистка</span>
                         <h4>Питательные пастилки «Гаосен»</h4>
@@ -170,7 +169,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/liuwei.png" alt="Чай Лювей" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Очистка</span>
                         <h4>Чай «Лювей»</h4>
@@ -179,7 +178,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/fito-changqing.png" alt="Fito-ChangQing" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Очистка</span>
                         <h4>Растительный напиток «Fito-ChangQing»</h4>
@@ -188,7 +187,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/active-probio-drink.png" alt="Напиток Active ProBio" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Очистка</span>
                         <h4>Растворимый напиток «Active ProBio»</h4>
@@ -197,7 +196,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/active-probio-capsules.png" alt="Капсулы Active ProBio" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Очистка</span>
                         <h4>Капсулы «Active ProBio»</h4>
@@ -213,7 +212,7 @@
             <div class="category-title">Серия Растворение <span>化系列</span></div>
             <div class="products-grid">
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/syuechinfu.png" alt="Капсулы Сюэчинфу" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Растворение</span>
                         <h4>Капсулы «Сюэчинфу»</h4>
@@ -222,7 +221,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/tasuan.png" alt="Капсулы Тасуан" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Растворение</span>
                         <h4>Капсулы с чесночной эссенцией «Тасуан»</h4>
@@ -238,7 +237,7 @@
             <div class="category-title">Серия Восстановление <span>补系列</span></div>
             <div class="products-grid">
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/tri-dragotsennosti.png" alt="Эликсир Три драгоценности" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Восстановление</span>
                         <h4>Эликсир «Три драгоценности»</h4>
@@ -247,7 +246,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/haytsaogay.png" alt="Хайцаогай" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Восстановление</span>
                         <h4>Мягкие капсулы «Хайцаогай»</h4>
@@ -256,7 +255,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/slimpower.png" alt="SlimPower" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Восстановление</span>
                         <h4>Растворимый напиток «SlimPower»</h4>
@@ -272,7 +271,7 @@
             <div class="category-title">Серия Регенерация <span>生系列</span></div>
             <div class="products-grid">
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/molodost-plus.png" alt="Молодость Плюс" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Регенерация</span>
                         <h4>Капсулы с пептидами «Молодость Плюс»</h4>
@@ -281,7 +280,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/dvizhenie-plus.png" alt="Движение плюс" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Регенерация</span>
                         <h4>Пастилки с пептидами «Движение плюс»</h4>
@@ -297,7 +296,7 @@
             <div class="category-title">Оздоровительные комплексы <span>套装系列</span></div>
             <div class="products-grid">
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/complex-1.png" alt="Комплекс для молодости" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Комплекс</span>
                         <h4>Для продления молодости</h4>
@@ -306,7 +305,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/complex-2.png" alt="Комплекс для похудения" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Комплекс</span>
                         <h4>Комплекс для похудения</h4>
@@ -315,7 +314,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/complex-3.png" alt="Комплекс для дыхания" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Комплекс</span>
                         <h4>Для дыхательной системы</h4>
@@ -324,7 +323,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/complex-4.png" alt="Комплекс для сердца" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Комплекс</span>
                         <h4>Для защиты сердца и мозга</h4>
@@ -333,7 +332,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/complex-5.png" alt="Комплекс для сахара" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Комплекс</span>
                         <h4>Для нормализации сахара</h4>
@@ -342,7 +341,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/complex-6.png" alt="Комплекс для печени" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Комплекс</span>
                         <h4>Для печени и желчного пузыря</h4>
@@ -351,16 +350,16 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/complex-7.png" alt="Комплекс для почек" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Комплекс</span>
                         <h4>Для укрепления почек</h4>
-                        <p>Перечень: «Молодность Плюс», эликсир «Саньцин», «Линчжи». Сочетать с сеансами БЭМ (регуляция функции почек) и РЭМ.</p>
+                        <p>Перечень: «Молодость Плюс», эликсир «Саньцин», «Линчжи». Сочетать с сеансами БЭМ (регуляция функции почек) и РЭМ.</p>
                         <div class="price-row"><div class="price">--- ₽</div><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20заказать:%20Комплекс%20для%20почек" target="_blank" class="buy-btn">Купить</a></div>
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/complex-8.png" alt="Комплекс для простаты" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Комплекс</span>
                         <h4>Для предстательной железы</h4>
@@ -369,7 +368,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/complex-9.png" alt="Комплекс для женщин" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Комплекс</span>
                         <h4>Для женщин</h4>
@@ -378,7 +377,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/complex-10.png" alt="Комплекс ци и крови" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Комплекс</span>
                         <h4>Для восполнения энергии ци и крови</h4>
@@ -387,7 +386,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/complex-11.png" alt="Комплекс для суставов" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Комплекс</span>
                         <h4>Для опорно-двигательного аппарата</h4>
@@ -396,7 +395,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/complex-12.png" alt="Комплекс для ЖКТ" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Комплекс</span>
                         <h4>Для желудка и кишечника</h4>
@@ -405,7 +404,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/complex-13.png" alt="Комплекс для фигуры" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Комплекс</span>
                         <h4>Для коррекции фигуры</h4>
@@ -414,7 +413,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/complex-14.png" alt="Комплекс для сна" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Комплекс</span>
                         <h4>Для нервной системы и сна</h4>
@@ -423,7 +422,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/complex-15.png" alt="Комплекс для рта" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Комплекс</span>
                         <h4>Для свежести полости рта</h4>
@@ -432,7 +431,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/complex-16.png" alt="Комплекс для иммунитета" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Комплекс</span>
                         <h4>Для укрепления иммунитета</h4>
@@ -441,7 +440,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/complex-17.png" alt="Комплекс при диабете" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Комплекс</span>
                         <h4>Для регуляции при сахарном диабете</h4>
@@ -450,7 +449,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/complex-18.png" alt="Комплекс психо-эмоциональный" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Комплекс</span>
                         <h4>Для психо-эмоционального состояния</h4>
@@ -459,7 +458,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/complex-19.png" alt="Комплекс баланса иммунитета" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Комплекс</span>
                         <h4>Для баланса иммунной системы</h4>
@@ -468,7 +467,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-slider"><div class="img-placeholder">Фото товара</div></div>
+                    <div class="product-img-wrap"><img src="images/complex-20.png" alt="Комплекс изначальной ци" class="product-img"></div>
                     <div class="product-info">
                         <span class="product-tag">Комплекс</span>
                         <h4>Для укрепления изначальной ци</h4>

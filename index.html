@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЯН-ШЕН — Возрождение из пепла | FOHOW 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #050505;
+            --bg-card: #0D0D0F;
+            --border: rgba(255, 255, 255, 0.08);
+            --ember: #FF3C00; /* Огонь, пепел */
+            --jade: #00FF9D; /* Нефритовый зеленый (из логотипа) */
+            --gold: #FFB627;
+            --text-main: #F5F5F7;
+            --text-dim: #86868B;
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Unbounded', sans-serif;
+            letter-spacing: -0.03em;
+            line-height: 1;
+        }
+
+        .cn-text { font-family: 'Noto Serif SC', serif; }
+
+        /* --- Анимация частиц (Пепел и Энергия) --- */
+        .particles-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            bottom: -10px;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            animation: rise linear infinite;
+            opacity: 0;
+        }
+        @keyframes rise {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            15% { opacity: 0.8; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) translateX(40px) scale(0); opacity: 0; }
+        }
+
+        /* --- Хедер --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.5);
+        }
+        .header-text {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 900;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--jade), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        nav a:hover { color: var(--text-main); }
+        nav a:hover::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--jade);
+        }
+
+        .currency-tag {
+            font-size: 0.75rem;
+            color: var(--gold);
+            border: 1px solid rgba(255, 182, 39, 0.3);
+            padding: 6px 12px;
+            border-radius: 4px;
+        }
+
+        /* --- Hero --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 40px;
+            position: relative;
+            background: radial-gradient(circle at 20% 80%, rgba(255, 60, 0, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(0, 255, 157, 0.1) 0%, transparent 50%);
+            overflow: hidden;
+        }
+
+        /* Гигантский китайский иероглиф на фон */
+        .hero-bg-char {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 60vw;
+            color: rgba(255, 255, 255, 0.02);
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 700;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1000px;
+        }
+
+        .hero-label {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--jade);
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+        .hero-label::before {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: var(--jade);
+            box-shadow: 0 0 10px var(--jade);
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 9rem);
+            font-weight: 900;
+            margin-bottom: 40px;
+            line-height: 0.9;
+        }
+        .hero h1 span {
+            display: block;
+            font-weight: 300;
+            color: var(--text-dim);
+            font-size: 0.7em;
+        }
+        .gradient-text-fire {
+            background: linear-gradient(180deg, #FFFFFF 0%, var(--ember) 150%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            max-width: 500px;
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            letter-spacing: 2px;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* --- Секции --- */
+        section {
+            padding: 120px 40px;
+            position: relative;
+        }
+
+        .section-head {
+            margin-bottom: 80px;
+            max-width: 800px;
+        }
+        .section-head h2 {
+            font-size: clamp(2rem, 5vw, 4.5rem);
+            margin-bottom: 20px;
+        }
+        .section-head p {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            max-width: 600px;
+        }
+
+        /* --- Философия Bento --- */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 300px 300px;
+            gap: 20px;
+        }
+
+        .bento-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .bento-card:hover {
+            border-color: rgba(0, 255, 157, 0.3);
+            transform: translateY(-5px);
+        }
+        .bento-card.large {
+            grid-column: span 2;
+            grid-row: span 2;
+            background: radial-gradient(circle at top right, rgba(255, 60, 0, 0.05), var(--bg-card));
+        }
+        .bento-card.large.green-bg {
+            background: radial-gradient(circle at bottom left, rgba(0, 255, 157, 0.05), var(--bg-card));
+        }
+
+        .card-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--gold);
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .bento-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        .bento-card.large h3 {
+            font-size: 3rem;
+        }
+
+        .bento-card p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* --- Продукция --- */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            position: relative;
+        }
+        .product-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transform: translateY(-10px);
+        }
+
+        .product-img-wrap {
+            width: 100%;
+            height: 300px;
+            background: radial-gradient(circle, #1A1A1D 0%, #050505 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-img-wrap::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 60, 0, 0.1), transparent 30%, rgba(0, 255, 157, 0.1), transparent 60%);
+            animation: spin 10s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        .product-img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
+            transition: transform 0.5s;
+        }
+        .product-card:hover .product-img { transform: scale(1.1); }
+
+        .product-info {
+            padding: 25px;
+            background: linear-gradient(to bottom, var(--bg-card), #0A0A0C);
+        }
+
+        .product-tag {
+            font-size: 0.7rem;
+            color: var(--jade);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .product-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        .product-info p {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+            height: 50px;
+            overflow: hidden;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border);
+            padding-top: 15px;
+        }
+        .price {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+        }
+        .buy-btn {
+            background: transparent;
+            border: 1px solid var(--text-dim);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+        }
+        .buy-btn:hover {
+            background: var(--ember);
+            border-color: var(--ember);
+            color: #fff;
+            box-shadow: 0 0 15px var(--ember);
+        }
+
+        /* --- Технологии --- */
+        .tech-section {
+            background: radial-gradient(circle at center, #0A0A0C, #050505);
+        }
+        .tech-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        .tech-card {
+            padding: 40px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        .tech-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .tech-list { list-style: none; margin-top: 20px; }
+        .tech-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .tech-list li::before {
+            content: '⚡';
+            color: var(--ember);
+        }
+
+        /* --- Подвал --- */
+        footer {
+            padding: 80px 40px 40px;
+            border-top: 1px solid var(--border);
+            background: #030303;
+            position: relative;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        footer h3 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;

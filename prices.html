@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стоимость услуг — ЯН-ШЕН Сочи</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --bg-main: #050505; --bg-card: #0D0D0F; --border: rgba(255, 255, 255, 0.08);
+            --ember: #FF3C00; --jade: #00FF9D; --gold: #FFB627;
+            --text-main: #F5F5F7; --text-dim: #86868B; --glass: rgba(255, 255, 255, 0.03);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--bg-main); color: var(--text-main); font-family: 'Inter', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; padding-bottom: 60px; }
+        h1, h2, h3, h4 { font-family: 'Unbounded', sans-serif; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 20px; }
+        p { color: var(--text-dim); line-height: 1.6; margin-bottom: 20px; }
+        a { text-decoration: none; color: var(--text-main); }
+        .cn-text { font-family: 'Noto Serif SC', serif; }
+        
+        /* Хедер */
+        header { position: fixed; top: 0; width: 100%; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+        header::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: repeating-linear-gradient(90deg, var(--jade) 0, var(--jade) 10px, transparent 10px, transparent 12px, var(--jade) 12px, var(--jade) 15px, transparent 15px, transparent 27px); opacity: 0.3; }
+        .header-logo { display: flex; align-items: center; gap: 15px; font-family: 'Unbounded'; font-weight: 900; font-size: 1rem; background: linear-gradient(90deg, var(--jade), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        nav ul { list-style: none; display: flex; gap: 20px; }
+        nav a { color: var(--text-dim); font-size: 0.85rem; font-weight: 500; transition: color 0.3s; }
+        nav a:hover { color: var(--text-main); }
+        .btn-header-phone { color: var(--gold); font-weight: 600; font-size: 0.9rem; }
+        .btn-primary { background: var(--ember); color: #fff; padding: 10px 20px; border-radius: 30px; font-weight: 600; font-size: 0.85rem; transition: all 0.3s; }
+        .btn-primary:hover { background: #fff; color: var(--ember); box-shadow: 0 0 20px var(--ember); }
+
+        /* Hero */
+        .page-hero { min-height: 50vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 40px 60px; position: relative; overflow: hidden; background: radial-gradient(circle at 50% 50%, rgba(255, 182, 39, 0.1) 0%, transparent 60%); }
+        .hero-bg-char { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 40vw; color: rgba(255, 255, 255, 0.02); font-family: 'Noto Serif SC'; font-weight: 700; z-index: 0; pointer-events: none; }
+        .page-hero-content { position: relative; z-index: 10; max-width: 1000px; margin: 0 auto; text-align: center; }
+        .page-hero h1 { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900; margin-bottom: 20px; }
+        .gradient-text-gold { background: linear-gradient(180deg, #FFFFFF 0%, var(--gold) 150%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* Секции */
+        section { padding: 80px 40px; max-width: 1000px; margin: 0 auto; position: relative; }
+        .content-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 40px; margin-bottom: 40px; overflow: hidden; }
+        .content-block h2 { font-size: 1.5rem; margin-bottom: 30px; color: var(--jade); display: flex; align-items: center; gap: 10px; }
+        .content-block h2::before { content: ''; display: block; width: 4px; height: 20px; background: var(--jade); }
+
+        /* Таблица */
+        .table-wrap { overflow-x: auto; }
+        .prices-table { width: 100%; border-collapse: collapse; min-width: 500px; }
+        .prices-table th, .prices-table td { padding: 20px 15px; text-align: left; border-bottom: 1px solid var(--border); }
+        .prices-table th { color: var(--text-dim); font-family: 'Unbounded'; font-weight: 400; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+        .prices-table td { color: var(--text-main); font-size: 0.95rem; }
+        .prices-table tr:last-child td { border-bottom: none; }
+        .prices-table td:last-child { text-align: right; color: var(--gold); font-family: 'Unbounded'; font-weight: 700; }
+
+        /* Форма записи (Краткая) */
+        .booking-cta { background: var(--bg-card); padding: 40px; border-radius: 20px; border: 1px solid var(--border); text-align: center; }
+        .btn-lg { display: inline-block; padding: 18px 40px; border-radius: 50px; font-weight: 600; font-size: 1rem; transition: all 0.3s; border: 1px solid transparent; cursor: pointer; text-align: center; margin-top: 20px; }
+        .btn-fire { background: var(--ember); color: #fff; } .btn-fire:hover { box-shadow: 0 0 30px var(--ember); transform: translateY(-3px); }
+
+        /* Подвал */
+        footer { padding: 80px 40px 40px; border-top: 1px solid var(--border); background: #030303; position: relative; z-index: 5; }
+        .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; max-width: 1200px; margin: 0 auto 60px; }
+        .footer-col h4 { font-family: 'Unbounded'; font-size: 1rem; margin-bottom: 20px; }
+        .footer-col ul { list-style: none; } .footer-col li { margin-bottom: 10px; }
+        .footer-col a { color: var(--text-dim); font-size: 0.9rem; } .footer-col a:hover { color: var(--text-main); }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); padding-top: 30px; display: flex; justify-content: space-between; color: #555; font-size: 0.8rem; }
+        .mobile-fixed-bar { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(10px); padding: 10px; border-top: 1px solid var(--border); z-index: 1001; }
+        .mobile-fixed-bar a { flex: 1; text-align: center; padding: 12px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; }
+        .mob-call { background: var(--glass); border: 1px solid var(--border); color: var(--text-main); margin-right: 10px; }
+        .mob-book { background: var(--ember); color: #fff; }
+        @media (max-width: 900px) { nav ul { display: none; } .mobile-fixed-bar { display: flex; } }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="header-logo">
+            <svg width="30" height="30" viewBox="0 0 100 100"><defs><linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00FF9D"/><stop offset="100%" stop-color="#00A86B"/></linearGradient></defs><circle cx="50" cy="50" r="46" fill="none" stroke="url(#g1)" stroke-width="2"/><path d="M35,50 C35,35 50,35 50,50 C50,65 65,65 65,50 C65,35 50,35 50,50 C50,65 35,65 35,50 Z" fill="none" stroke="url(#g1)" stroke-width="4"/></svg>
+            ЯН-ШЕН
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="bioenergy-massage.html">Массаж FOHOW</a></li>
+                <li><a href="tim-fohow.html">Капсула TIM</a></li>
+                <li><a href="prices.html">Цены</a></li>
+                <li><a href="index.html#contacts">Контакты</a></li>
+            </ul>
+        </nav>
+        <div style="display: flex; gap: 20px; align-items: center;">
+            <a href="tel:+79881434998" class="btn-header-phone">+7 988 143 49 98</a>
+            <a href="#booking-cta" class="btn-primary">Записаться</a>
+        </div>
+    </header>
+
+    <div class="page-hero">
+        <div class="hero-bg-char cn-text">價</div>
+        <div class="page-hero-content">
+            <h1 class="gradient-text-gold">Стоимость услуг</h1>
+            <p style="font-size: 1.1rem; color: var(--text-dim); max-width: 600px; margin: 0 auto;">Прозрачные цены на все виды массажа и остеопатии. Возможны индивидуальные программы после консультации специалиста.</p>
+        </div>
+    </div>
+
+    <section>
+        <div class="content-block gsap-reveal">
+            <h2>Массаж и Капсула TIM</h2>
+            <div class="table-wrap">
+                <table class="prices-table">
+                    <thead>
+                        <tr>
+                            <th>Услуга</th>
+                            <th style="text-align: right;">Стоимость</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Биоэнергомассаж FOHOW (первое посещение)</td><td>2 090 ₽</td></tr>
+                        <tr><td>Биоэнергомассаж FOHOW (повторный)</td><td>2 510 ₽</td></tr>
+                        <tr><td>Биоэнергомассаж FOHOW (60 мин)</td><td>2 790 ₽</td></tr>
+                        <tr><td>Капсула TIM FOHOW (первое посещение)</td><td>1 120 ₽</td></tr>
+                        <tr><td>Капсула TIM FOHOW (45–60 мин)</td><td>1 670 ₽</td></tr>
+                        <tr><td>Массаж лица FOHOW (первое посещение)</td><td>840 ₽</td></tr>
+                        <tr><td>Массаж лица FOHOW (повторный)</td><td>1 390 ₽</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="content-block gsap-reveal">
+            <h2>Остеопатия</h2>
+            <div class="table-wrap">
+                <table class="prices-table">
+                    <thead>
+                        <tr>
+                            <th>Услуга</th>
+                            <th style="text-align: right;">Стоимость</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Консультация остеопата</td><td>1 670 ₽</td></tr>
+                        <tr><td>Сеанс остеопатии</td><td>3 350 ₽</td></tr>
+                        <tr><td>Выезд специалиста на дом</td><td>+ 1 120 ₽</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="content-block gsap-reveal" style="border-color: var(--gold); background: radial-gradient(circle at center, rgba(255, 182, 39, 0.03), var(--bg-card));">
+            <h2 style="color: var(--gold);">Действует система скидок</h2>
+            <p style="color: var(--text-main);">Мы предлагаем гибкую систему скидок: именинникам, при покупке абонемента на несколько сеансов, а также пенсионерам и многодетным семьям.</p>
+            <p style="color: var(--text-dim); font-size: 0.9rem;">Подробнее об акциях и спецпредложениях можно узнать на странице <a href="akcii.html" style="color: var(--gold); border-bottom: 1px solid var(--gold);">Акции и сертификаты</a> или у администратора по телефону.</p>
+        </div>
+
+        <div id="booking-cta" class="booking-cta gsap-reveal">
+            <h2 style="color: var(--text-main);">Готовы записаться?</h2>
+            <p>Свяжитесь с нами, и мы подберем удобное для вас время и оптимальную программу процедур.</p>
+            <a href="tel:+79881434998" class="btn-lg btn-fire">ПОЗВОНИТЬ И ЗАПИСАТЬСЯ</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col"><h4 class="gradient-text-gold">ЯН-ШЕН</h4><p>«Возрождение из пепла»</p><p style="font-size: 0.9rem; margin-top: 10px;">Центр здоровья и восстановления</p><p style="font-size: 0.9rem;">Сочи, Навагинская, 9</p><a href="tel:+79881434998" style="color: var(--gold); font-size: 0.9rem;">+7 988 143 49 98</a></div>
+            <div class="footer-col"><h4>Навигация</h4><ul><li><a href="index.html">Главная</a></li><li><a href="bioenergy-massage.html">Массаж FOHOW</a></li><li><a href="tim-fohow.html">Капсула TIM</a></li><li><a href="prices.html">Цены</a></li></ul></div>
+            <div class="footer-col"><h4>Информация</h4><ul><li><a href="#">FAQ</a></li><li><a href="#">Акции</a></li><li><a href="#">Контакты</a></li></ul></div>
+        </div>
+        <div class="footer-bottom"><p>© 2026 ЯН-ШЕН. Все права защищены.</p><p>Искусство возрождения</p></div>
+    </footer>
+
+    <div class="mobile-fixed-bar"><a href="tel:+79881434998" class="mob-call">☎ Позвонить</a><a href="tel:+79881434998" class="mob-book">Записаться</a></div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray(".gsap-reveal").forEach(el => {
+            gsap.from(el, { opacity: 0, y: 50, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 85%" } });
+        });
+    </script>
+</body>
+</html>

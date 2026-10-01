@@ -11,157 +11,157 @@
     <meta property="og:description" content="Центр восстановления, здоровья и гармонии в Сочи. Биоэнергомассаж, капсула TIM, остеопатия. Тел: +7 988 143 49 98">
     <meta property="og:url" content="https://atarh.github.io/Yang-Sheng/">
     <meta property="og:image" content="https://atarh.github.io/Yang-Sheng/preview.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="ЯН-ШЕН «Возрождение из пепла»">
-    <meta name="twitter:description" content="Центр восстановления, здоровья и гармонии в Сочи. Запись: +7 988 143 49 98">
-    <meta name="twitter:image" content="https://atarh.github.io/Yang-Sheng/preview.jpg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Marcellus&family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Подключаем GSAP для 3D параллакса -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+
     <style>
         :root {
-            --paper: #eee4cd;
-            --paper-light: #f5eddc;
-            --paper-dark: #d8c9aa;
-            --ink: #18201d;
-            --ink-soft: #303a34;
-            --jade: #173c35;
-            --jade-light: #28564b;
-            --vermillion: #a83227;
-            --gold: #a88a50;
-            --gold-light: #c4a76b;
-            --border: rgba(55, 48, 35, 0.35);
-            --border-light: rgba(55, 48, 35, 0.18);
+            --paper: #eee5ce;
+            --paper-light: #f7f1df;
+            --paper-dark: #ddd0b2;
+            --ink: #17231c;
+            --ink-soft: #394137;
+            --red: #9d2f25;
+            --red-dark: #76221c;
+            --gold: #a8894b;
+            --gold-light: #c5aa6a;
+            --line: rgba(87, 68, 37, 0.42);
+            --max-width: 1280px;
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { 
-            background: radial-gradient(ellipse at center, rgba(255,255,255,0.25) 0%, rgba(238,228,205,0.75) 70%, rgba(210,195,163,0.35) 100%), var(--paper);
-            color: var(--ink); font-family: "Noto Serif", serif; 
-            overflow-x: hidden; -webkit-font-smoothing: antialiased; padding-bottom: 60px; position: relative; 
+        body {
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.35), transparent 65%), var(--paper);
+            color: var(--ink);
+            font-family: "Cormorant Garamond", Georgia, serif;
+            overflow-x: hidden;
         }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; text-decoration: none; }
 
-        /* Тонкие традиционные рамки свитка */
-        body::before { content: ""; position: fixed; inset: 18px; border: 1px solid var(--border-light); pointer-events: none; z-index: 9998; }
-        body::after { content: ""; position: fixed; inset: 24px; border: 1px solid rgba(168,138,80,0.18); pointer-events: none; z-index: 9998; }
+        /* Тонкая традиционная рамка свитка */
+        body::before { content: ""; position: fixed; inset: 14px; border: 1px solid rgba(111, 86, 45, 0.35); pointer-events: none; z-index: 999; }
 
-        h1, h2, h3, h4 { font-family: "Noto Serif", serif; font-weight: 500; line-height: 1.1; margin-bottom: 20px; color: var(--ink); }
-        p { color: var(--ink-soft); line-height: 1.6; margin-bottom: 20px; font-size: 1rem; }
-        a { text-decoration: none; color: inherit; }
-        .cn-text { font-family: "Noto Serif SC", serif; }
-        
-        #tsparticles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; opacity: 0.3; }
-        
-        /* Гохуа Бамбук (Светлый акварельный стиль) */
-        .gohua-bamboo { position: fixed; top: 0; width: 300px; height: 100vh; z-index: 0; pointer-events: none; opacity: 0.2; }
-        .bamboo-left { left: 0; } .bamboo-right { right: 0; transform: scaleX(-1); }
-        
+        .container { width: min(calc(100% - 80px), var(--max-width)); margin: auto; }
+        .section { position: relative; padding: 110px 0; }
+        .section-title { text-align: center; margin-bottom: 65px; }
+        .section-title .cn { display: block; font-family: "Noto Serif SC", serif; font-size: 52px; color: rgba(23,35,28,0.13); line-height: 0.8; margin-bottom: -18px; }
+        .section-title h2 { position: relative; display: inline-block; font-family: "Marcellus", "Cormorant Garamond", serif; font-size: clamp(34px, 4vw, 54px); font-weight: 500; letter-spacing: 0.04em; }
+        .section-title h2::after { content: ""; display: block; width: 90px; height: 1px; background: var(--gold); margin: 20px auto 0; }
+        .section-title p { max-width: 650px; margin: 22px auto 0; font-size: 20px; line-height: 1.6; color: var(--ink-soft); }
+
         /* Хедер */
-        header { position: fixed; top: 0; width: 100%; padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(238,228,205,0.82); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-light); }
-        .header-logo { display: flex; align-items: center; gap: 15px; font-family: "Noto Serif", serif; font-weight: 600; font-size: 1.1rem; color: var(--ink); }
-        .header-logo-img { height: 40px; width: auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
-        
-        nav { display: flex; align-items: center; gap: 25px; }
-        nav ul { list-style: none; display: flex; gap: 20px; }
-        nav a { position: relative; color: var(--ink); font-size: 0.85rem; font-weight: 400; font-family: "Noto Serif", serif; transition: color 0.3s; }
-        nav a::after { content: ""; position: absolute; left: 50%; bottom: -7px; width: 0; height: 1px; background: var(--vermillion); transform: translateX(-50%); transition: width 0.3s ease; }
-        nav a:hover { color: var(--vermillion); }
-        nav a:hover::after { width: 100%; }
-        .dropdown { position: relative; padding-bottom: 20px; margin-bottom: -20px; }
-        .dropdown-content { display: block; visibility: hidden; opacity: 0; position: absolute; top: 100%; left: -20px; background: var(--paper-light); border: 1px solid var(--border-light); border-radius: 0 0 2px 2px; padding: 10px; min-width: 260px; z-index: 100; box-shadow: 0 5px 20px rgba(30,30,20,0.08); transition: opacity 0.2s, visibility 0.2s; border-top: 1px solid var(--gold); }
-        .dropdown:hover .dropdown-content, .dropdown:focus-within .dropdown-content { visibility: visible; opacity: 1; }
-        .dropdown-content a { display: block; padding: 10px; border-bottom: 1px solid var(--border-light); font-size: 0.85rem; color: var(--ink-soft); }
+        header { position: fixed; top: 0; left: 0; width: 100%; z-index: 900; padding: 18px 50px; background: rgba(238,229,206,0.91); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(111,86,45,0.22); }
+        .header-inner { max-width: 1400px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+        .logo { display: flex; align-items: center; gap: 14px; font-family: "Marcellus", serif; font-size: 23px; letter-spacing: 0.12em; white-space: nowrap; }
+        .logo-img { height: 40px; width: auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+        nav { display: flex; align-items: center; gap: 32px; }
+        nav a { font-size: 17px; color: var(--ink-soft); transition: 0.3s; }
+        nav a:hover { color: var(--red); }
+        .dropdown { position: relative; }
+        .dropdown-content { display: none; position: absolute; top: 100%; left: -20px; background: var(--paper-light); border: 1px solid var(--line); padding: 10px; min-width: 260px; box-shadow: 0 5px 20px rgba(30,30,20,0.08); }
+        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown-content a { display: block; padding: 8px 10px; font-size: 16px; border-bottom: 1px solid rgba(87,68,37,0.15); }
         .dropdown-content a:last-child { border-bottom: none; }
-        .dropdown-content a:hover { color: var(--vermillion); background: transparent; }
-        .btn-header-phone { color: var(--vermillion); font-weight: 600; font-size: 0.95rem; font-family: "Noto Serif", serif; }
-        .btn-primary { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 0 24px; background: var(--jade); color: #f4ead5; border: 1px solid var(--jade-dark); font-family: "Noto Serif", serif; font-size: 0.85rem; letter-spacing: 0.04em; transition: background 0.3s ease, transform 0.3s ease; border-radius: 0; box-shadow: none; }
-        .btn-primary:hover { background: var(--jade-light); transform: translateY(-2px); }
+        .header-button { padding: 11px 24px; border: 1px solid var(--red); color: var(--red); transition: 0.3s; font-family: "Marcellus", serif; font-size: 17px; }
+        .header-button:hover { background: var(--red); color: #fff; }
 
         /* Hero */
-        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 100px 40px 120px; position: relative; overflow: hidden; background: linear-gradient(90deg, rgba(255,255,255,0.15), transparent 15%, transparent 85%, rgba(100,80,50,0.08)); z-index: 2; }
-        .hero-bg-char { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 50vw; color: rgba(24,32,29,0.025); font-family: 'Noto Serif SC'; font-weight: 700; z-index: 0; pointer-events: none; }
-        .hero-mountains { position: absolute; bottom: 0; left: 0; width: 100%; height: 200px; z-index: 1; pointer-events: none; }
-        
-        .hero-content { position: relative; z-index: 10; max-width: 1000px; margin: 0 auto; text-align: center; }
+        .hero { min-height: 100vh; position: relative; display: flex; align-items: center; overflow: hidden; padding-top: 110px; }
+        .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 70% 40%, rgba(255,255,255,0.35), transparent 35%); z-index: 1; }
+        .hero-content { position: relative; z-index: 5; width: 100%; padding: 80px 0; text-align: center; }
+        .hero-small { font-family: "Noto Serif SC", serif; font-size: 20px; letter-spacing: 0.25em; color: var(--red); margin-bottom: 25px; }
+        .hero h1 { font-family: "Marcellus", "Cormorant Garamond", serif; font-size: clamp(48px, 8vw, 108px); font-weight: 500; line-height: 0.95; letter-spacing: 0.02em; margin-bottom: 28px; }
+        .hero-subtitle { font-size: 28px; line-height: 1.25; max-width: 800px; margin: 0 auto 35px; color: var(--ink-soft); font-style: italic; }
+        .hero-buttons { display: flex; gap: 18px; align-items: center; justify-content: center; flex-wrap: wrap; }
+        .btn-red { display: inline-flex; align-items: center; justify-content: center; padding: 15px 32px; background: var(--red); color: #fff; font-family: "Marcellus", serif; font-size: 17px; border: 1px solid var(--red); transition: 0.3s; }
+        .btn-red:hover { background: var(--red-dark); transform: translateY(-2px); }
+        .btn-outline { display: inline-flex; padding: 15px 30px; border: 1px solid var(--gold); color: var(--ink); font-family: "Marcellus", serif; font-size: 17px; transition: 0.3s; }
+        .btn-outline:hover { background: rgba(168,137,75,0.12); transform: translateY(-2px); }
 
-        .hero h1 { font-size: clamp(2.5rem, 8vw, 7rem); font-weight: 600; margin-bottom: 30px; letter-spacing: -0.02em; font-family: 'Noto Serif SC', serif; }
-        .hero h1 span { display: block; font-weight: 400; color: var(--ink-soft); font-size: 0.55em; margin-top: 15px; letter-spacing: 0.1em; }
-        .gradient-text-ember { background: none; -webkit-text-fill-color: unset; color: var(--ink); }
-        .hero p.subtitle { font-family: "Noto Serif", serif; font-size: 1.3rem; color: var(--ink-soft); margin: 0 auto 50px; font-style: italic; max-width: 700px; }
-        .hero-buttons { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-        .btn-lg { padding: 16px 36px; border-radius: 0; font-family: "Noto Serif", serif; font-weight: 500; font-size: 1rem; letter-spacing: 0.04em; transition: background 0.3s ease, transform 0.3s ease; cursor: pointer; text-align: center; border: 1px solid transparent; }
-        .btn-fire { background: var(--jade); color: #f4ead5; border: 1px solid var(--jade-dark); box-shadow: none; } 
-        .btn-fire:hover { background: var(--jade-light); transform: translateY(-2px); box-shadow: none; }
-        .btn-ghost { background: transparent; border: 1px solid var(--gold); color: var(--ink); } 
-        .btn-ghost:hover { background: rgba(168,138,80,0.08); border-color: var(--gold); transform: translateY(-2px); }
+        /* Параллакс элементы */
+        .background-character { position: absolute; font-family: "Noto Serif SC", serif; font-size: 360px; color: rgba(23,35,28,0.045); user-select: none; pointer-events: none; z-index: 2; }
+        .character-left { left: -80px; top: 15%; }
+        .character-right { right: -70px; bottom: 5%; }
+        .hero-mountains { position: absolute; bottom: 0; left: 0; width: 100%; height: 250px; z-index: 3; pointer-events: none; }
+        .seal { width: 80px; height: 80px; border: 3px solid var(--red); color: var(--red); display: flex; align-items: center; justify-content: center; font-family: "Noto Serif SC", serif; font-size: 28px; transform: rotate(-4deg); position: absolute; right: 12%; bottom: 17%; opacity: 0.9; z-index: 4; }
 
-        /* Общие секции */
-        section { padding: 100px 40px; position: relative; max-width: 1180px; margin: 0 auto; z-index: 5; }
-        .section-head { margin-bottom: 70px; text-align: center; position: relative; }
-        .brush-stroke { width: 120px; height: 20px; margin: 0 auto 30px; opacity: 0.8; }
-        .section-head h2 { font-size: clamp(2rem, 5vw, 3.2rem); color: var(--ink); font-family: "Noto Serif SC", serif; font-weight: 500; }
-        .section-head p { max-width: 600px; margin: 0 auto; font-style: italic; font-size: 1.1rem; color: var(--ink-soft); }
-
-        /* СЕКЦИЯ ПРИНЦИПОВ */
-        .principles-section { background: linear-gradient(to bottom, transparent 0%, rgba(216,201,170,0.15) 50%, transparent 100%); }
-        .principles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .principle-card { background: rgba(245, 237, 220, 0.55); border: 1px solid var(--border-light); padding: 40px 30px; transition: transform 0.35s ease, box-shadow 0.35s ease; position: relative; overflow: hidden; box-shadow: 0 5px 20px rgba(30,30,20,0.08); }
-        .principle-card::before { content: ""; position: absolute; top: 10px; left: 10px; width: 20px; height: 20px; border-top: 1px solid var(--gold); border-left: 1px solid var(--gold); opacity: 0.65; transition: opacity 0.3s; }
-        .principle-card::after { content: ""; position: absolute; bottom: 10px; right: 10px; width: 20px; height: 20px; border-bottom: 1px solid var(--gold); border-right: 1px solid var(--gold); opacity: 0.65; transition: opacity 0.3s; }
-        .principle-card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 12px 30px rgba(40,35,25,0.12); }
-        .principle-card:hover::before, .principle-card:hover::after { opacity: 1; }
-        .p-icon { width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--ink); border-radius: 50%; color: var(--jade); font-size: 1.5rem; margin-bottom: 25px; background: rgba(255,255,255,0.3); }
-        .p-num { position: absolute; top: 20px; right: 25px; font-family: "Noto Serif", serif; font-size: 2.5rem; color: rgba(24,32,29,0.05); font-weight: 700; }
-        .principle-card h3 { font-size: 1.2rem; margin-bottom: 15px; color: var(--ink); line-height: 1.3; min-height: 60px; }
-        .principle-card p { font-size: 0.9rem; color: var(--ink-soft); margin: 0; }
-        .highlight-98 { font-family: "Noto Serif", serif; color: var(--vermillion); font-size: 1.2rem; font-weight: 600; }
+        /* Принципы */
+        .principles { background: linear-gradient(rgba(221,208,178,0.25), rgba(247,241,223,0.4)); }
+        .principles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .principle-card { position: relative; padding: 40px 32px; min-height: 280px; background: rgba(247,241,223,0.65); border: 1px solid var(--line); transition: 0.35s; text-align: center; }
+        .principle-card:hover { transform: translateY(-7px); border-color: var(--gold); box-shadow: 0 20px 50px rgba(60,45,25,0.10); }
+        .p-number { font-family: "Noto Serif SC", serif; font-size: 46px; color: rgba(157,47,37,0.25); margin-bottom: 18px; }
+        .principle-card h3 { font-family: "Marcellus", serif; font-size: 26px; font-weight: 500; margin-bottom: 14px; }
+        .principle-card p { font-size: 18px; line-height: 1.55; color: var(--ink-soft); }
+        .highlight-98 { color: var(--red); font-weight: 600; font-size: 20px; }
+        .p-seal { position: absolute; right: 20px; bottom: 20px; width: 38px; height: 38px; border: 1px solid var(--red); color: var(--red); display: flex; align-items: center; justify-content: center; font-family: "Noto Serif SC", serif; opacity: 0.6; }
 
         /* Услуги */
-        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .service-card { background: rgba(245, 237, 220, 0.55); border: 1px solid var(--border-light); padding: 34px; transition: transform 0.35s ease, box-shadow 0.35s ease; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; height: 280px; box-shadow: 0 5px 20px rgba(30,30,20,0.08); }
-        .service-card::before { content: ""; position: absolute; top: 10px; left: 10px; width: 20px; height: 20px; border-top: 1px solid var(--gold); border-left: 1px solid var(--gold); opacity: 0.65; transition: opacity 0.3s; }
-        .service-card::after { content: ""; position: absolute; bottom: 10px; right: 10px; width: 20px; height: 20px; border-bottom: 1px solid var(--gold); border-right: 1px solid var(--gold); opacity: 0.65; transition: opacity 0.3s; }
-        .service-card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 12px 30px rgba(40,35,25,0.12); }
-        .service-card:hover::before, .service-card:hover::after { opacity: 1; }
-        .service-card h3 { font-size: 1.5rem; color: var(--ink); }
-        .service-card p { font-size: 0.9rem; color: var(--ink-soft); }
-        .service-card a { color: var(--vermillion); font-size: 0.85rem; font-weight: 500; font-family: "Montserrat", sans-serif; text-transform: uppercase; letter-spacing: 0.05em; }
-        .card-num { position: absolute; top: 20px; right: 20px; font-family: "Noto Serif", serif; font-size: 1.2rem; color: rgba(24,32,29,0.1); }
-
-        /* Подвал */
-        footer { padding: 70px 40px 40px; border-top: 1px solid var(--border-light); background: rgba(216,201,170,0.25); position: relative; z-index: 5; text-align: center; }
-        .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; max-width: 1180px; margin: 0 auto 60px; text-align: left; }
-        .footer-col h4 { font-family: 'Noto Serif SC', serif; font-size: 1.2rem; margin-bottom: 20px; color: var(--ink); }
-        .footer-col ul { list-style: none; } .footer-col li { margin-bottom: 10px; }
-        .footer-col a { color: var(--ink-soft); font-size: 0.9rem; transition: color 0.3s; } .footer-col a:hover { color: var(--vermillion); }
-        .footer-bottom { max-width: 1180px; margin: 0 auto; border-top: 1px solid var(--border-light); padding-top: 30px; display: flex; justify-content: space-between; color: var(--ink-soft); opacity: 0.7; font-size: 0.8rem; font-family: "Montserrat", sans-serif; text-transform: uppercase; letter-spacing: 0.2em; }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .service-card { position: relative; padding: 40px 32px; min-height: 250px; background: rgba(247,241,223,0.65); border: 1px solid var(--line); transition: 0.35s; display: flex; flex-direction: column; justify-content: space-between; }
+        .service-card:hover { transform: translateY(-7px); border-color: var(--gold); box-shadow: 0 20px 50px rgba(60,45,25,0.10); }
+        .service-card h3 { font-family: "Marcellus", serif; font-size: 26px; font-weight: 500; margin-bottom: 14px; }
+        .service-card p { font-size: 18px; line-height: 1.55; color: var(--ink-soft); }
+        .service-card a { display: inline-block; margin-top: 20px; font-size: 16px; color: var(--red); border-bottom: 1px solid var(--red); padding-bottom: 2px; }
         
-        .mobile-fixed-bar { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(238,228,205,0.95); backdrop-filter: blur(10px); padding: 10px; border-top: 1px solid var(--border-light); z-index: 1001; }
-        .mobile-fixed-bar a { flex: 1; text-align: center; padding: 12px; border-radius: 0; font-weight: 500; font-size: 0.85rem; font-family: "Noto Serif", serif; }
+        /* Подвал */
+        footer { background: #18221c; color: #e9dfc6; padding: 60px 0 35px; position: relative; z-index: 10; }
+        .footer-inner { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 50px; }
+        footer h3 { font-family: "Marcellus", serif; font-size: 25px; font-weight: 400; margin-bottom: 18px; }
+        footer p, footer a { color: rgba(233,223,198,0.72); font-size: 17px; line-height: 1.7; }
+        footer a:hover { color: #fff; }
+        .footer-bottom { margin-top: 50px; padding-top: 25px; border-top: 1px solid rgba(233,223,198,0.18); text-align: center; color: rgba(233,223,198,0.45); font-size: 14px; }
+
+        /* Мобильная кнопка */
+        .mobile-fixed-bar { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(238,229,206,0.95); backdrop-filter: blur(10px); padding: 10px; border-top: 1px solid var(--line); z-index: 1001; }
+        .mobile-fixed-bar a { flex: 1; text-align: center; padding: 12px; font-weight: 500; font-size: 16px; font-family: "Marcellus", serif; }
         .mob-call { background: transparent; border: 1px solid var(--gold); color: var(--ink); margin-right: 10px; }
-        .mob-book { background: var(--jade); color: #f4ead5; border: 1px solid var(--jade-dark); }
-        @media (max-width: 900px) { nav ul { display: none; } .services-grid, .principles-grid { grid-template-columns: 1fr; } section { padding: 60px 20px; } .mobile-fixed-bar { display: flex; } .gohua-bamboo { display: none; } .principle-card h3 { min-height: auto; } body::before, body::after { display: none; } }
+        .mob-book { background: var(--red); color: #fff; border: 1px solid var(--red-dark); }
+
+        @media (max-width: 1000px) {
+            nav { display: none; }
+            header { padding: 15px 30px; }
+            .principles-grid, .services-grid { grid-template-columns: 1fr 1fr; }
+            .footer-inner { grid-template-columns: 1fr 1fr; }
+            .character-left, .character-right { font-size: 200px; }
+        }
+        @media (max-width: 650px) {
+            body::before { inset: 6px; }
+            .container { width: min(calc(100% - 40px), var(--max-width)); }
+            .section { padding: 75px 0; }
+            .logo { font-size: 18px; }
+            .header-button { display: none; }
+            .hero h1 { font-size: 48px; }
+            .hero-subtitle { font-size: 22px; }
+            .hero-buttons { flex-direction: column; align-items: stretch; }
+            .principles-grid, .services-grid { grid-template-columns: 1fr; }
+            .footer-inner { grid-template-columns: 1fr; }
+            .mobile-fixed-bar { display: flex; }
+        }
     </style>
 </head>
 <body>
-    <div id="tsparticles"></div>
-    <div class="gohua-bamboo bamboo-left" id="bamboo-left"><svg width="100%" height="100%" viewBox="0 0 300 1080"><path d="M150 -50 L150 1130" stroke="#173c35" stroke-width="3" opacity="0.4"/><path d="M150 200 L140 220 L160 220 Z" fill="#173c35" opacity="0.3"/><path d="M150 220 Q250 300 270 400" stroke="#173c35" stroke-width="2" fill="none" opacity="0.4"/></svg></div>
-    <div class="gohua-bamboo bamboo-right" id="bamboo-right"><svg width="100%" height="100%" viewBox="0 0 300 1080"><path d="M150 -50 L150 1130" stroke="#173c35" stroke-width="3" opacity="0.4"/><path d="M150 200 L140 220 L160 220 Z" fill="#173c35" opacity="0.3"/><path d="M150 220 Q250 300 270 400" stroke="#173c35" stroke-width="2" fill="none" opacity="0.4"/></svg></div>
 
+    <!-- Хедер -->
     <header>
-        <a href="index.html" class="header-logo">
-            <img src="logo.png" alt="ЯН-ШЕН Логотип" class="header-logo-img">
-            ЯН-ШЕН
-        </a>
-        <nav>
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li class="dropdown">
-                    <a href="#">Услуги ▾</a>
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <!-- Если есть logo.png, он отобразится. Если нет - будет текст -->
+                <img src="logo.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
+                <span>ЯН-ШЕН</span>
+            </a>
+            <nav>
+                <a href="#principles">Принципы</a>
+                <div class="dropdown">
+                    <a href="#services">Услуги ▾</a>
                     <div class="dropdown-content">
                         <a href="bioenergy-massage.html">Биоэнергомассаж</a>
                         <a href="tim-fohow.html">Капсула TIM</a>
@@ -170,105 +170,149 @@
                         <a href="osteopatiya.html">Сеанс остеопатии</a>
                         <a href="viezd-na-dom.html">Выезд специалиста</a>
                     </div>
-                </li>
-                <li><a href="products.html">Продукция</a></li>
-                <li><a href="prices.html">Цены</a></li>
-                <li><a href="sertifikat.html">Сертификаты</a></li>
-                <li><a href="#">О нас</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">Контакты</a></li>
-            </ul>
-        </nav>
-        <div style="display: flex; gap: 20px; align-items: center;">
-            <a href="tel:+79881434998" class="btn-header-phone">+7 988 143 49 98</a>
-            <a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20записаться%20на%20процедуру" target="_blank" rel="noopener noreferrer" class="btn-primary">Записаться</a>
+                </div>
+                <a href="products.html">Продукция</a>
+                <a href="prices.html">Цены</a>
+                <a href="sertifikat.html">Сертификаты</a>
+            </nav>
+            <a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20записаться%20на%20процедуру" target="_blank" class="header-button">Записаться</a>
         </div>
     </header>
 
-    <!-- ГЛАВНЫЙ ЭКРАН -->
-    <div class="hero" id="home">
-        <div class="hero-bg-char cn-text">養生</div>
-        <svg class="hero-mountains" id="mountains" viewBox="0 0 1440 200" fill="none" preserveAspectRatio="none">
-            <path d="M0,200 L0,150 L150,80 L300,120 L450,60 L600,140 L750,90 L900,130 L1050,70 L1200,110 L1440,80 L1440,200 Z" fill="rgba(216,201,170,0.3)"/>
-            <path d="M0,200 L0,180 L100,120 L250,160 L400,110 L550,170 L700,130 L850,160 L1000,100 L1200,150 L1440,120 L1440,200 Z" fill="rgba(238,228,205,0.8)"/>
-        </svg>
+    <!-- Главный экран с параллаксом -->
+    <section class="hero" id="home">
+        <!-- Параллакс гигантские иероглифы -->
+        <div class="background-character character-left" id="char-left">和</div>
+        <div class="background-character character-right" id="char-right">生</div>
         
-        <div class="hero-content">
-            <h1><span class="gradient-text-ember">ЯН-ШЕН</span><span>ВОЗРОЖДЕНИЕ ИЗ ПЕПЛА</span></h1>
-            <p class="subtitle">Центр восстановления, здоровья и гармонии</p>
-            <div class="hero-buttons">
-                <a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20записаться%20на%20процедуру" target="_blank" rel="noopener noreferrer" class="btn-lg btn-fire">ЗАПИСАТЬСЯ</a>
-                <a href="#services" class="btn-lg btn-ghost">ПОСМОТРЕТЬ УСЛУГИ</a>
-            </div>
-        </div>
-    </div>
+        <!-- Параллакс горы (SVG) -->
+        <svg class="hero-mountains" id="mountains" viewBox="0 0 1440 250" fill="none" preserveAspectRatio="none">
+            <path d="M0,250 L0,180 L150,100 L300,140 L450,80 L600,160 L750,110 L900,150 L1050,90 L1200,130 L1440,100 L1440,250 Z" fill="rgba(216,201,170,0.3)"/>
+            <path d="M0,250 L0,220 L100,160 L250,200 L400,150 L550,210 L700,170 L850,200 L1000,140 L1200,190 L1440,160 L1440,250 Z" fill="rgba(238,229,206,0.8)"/>
+        </svg>
 
-    <!-- ТРИ ПРИНЦИПА -->
-    <section id="principles" class="principles-section">
-        <div class="section-head">
-            <svg class="brush-stroke brush-anim" viewBox="0 0 120 20" fill="none"><path d="M0 10 C20 0 40 20 60 10 C80 0 100 20 120 10" stroke="#a88a50" stroke-width="2" stroke-linecap="round"/></svg>
-            <h2 class="gsap-reveal">Три принципа ЯН-ШЕН</h2>
-            <p class="gsap-reveal">Фундамент нашего центра. Мы не обещаем чудес, мы опираемся на науку, природу и древнюю мудрость.</p>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-small">ЯН — ШЕН</div>
+                <h1>ВОЗРОЖДЕНИЕ<br>ИЗ ПЕПЛА</h1>
+                <div class="hero-subtitle">Центр восстановления, здоровья и гармонии в Сочи</div>
+                <div class="hero-buttons">
+                    <a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20записаться%20на%20процедуру" target="_blank" class="btn-red">ЗАПИСАТЬСЯ</a>
+                    <a href="#services" class="btn-outline">ПОСМОТРЕТЬ УСЛУГИ</a>
+                </div>
+            </div>
         </div>
-        <div class="principles-grid">
-            <div class="principle-card gsap-card">
-                <span class="p-num">01</span>
-                <span class="p-icon">⚡</span>
-                <h3>Заметный и быстрый эффект</h3>
-                <p>Результат, который вы почувствуете уже после первых сеансов. Мы фокусируемся на реальном улучшении вашего самочувствия, а не на временных иллюзиях.</p>
+        <div class="seal">福</div>
+    </section>
+
+    <!-- Три принципа -->
+    <section class="section principles" id="principles">
+        <div class="container">
+            <div class="section-title">
+                <span class="cn">養生</span>
+                <h2>Три принципа ЯН-ШЕН</h2>
+                <p>Фундамент нашего центра. Мы не обещаем чудес, мы опираемся на науку, природу и древнюю мудрость.</p>
             </div>
-            <div class="principle-card gsap-card">
-                <span class="p-num">02</span>
-                <span class="p-icon">💧</span>
-                <h3>Натуральный состав — <span class="highlight-98">98%</span> усвоения</h3>
-                <p>Природа создает, наука совершенствует. Субнанометрическое дробление клеточной мембраны обеспечивает 98% усвоения активных веществ организмом. Безопасно и абсолютно натурально.</p>
-            </div>
-            <div class="principle-card gsap-card">
-                <span class="p-num">03</span>
-                <span class="p-icon">☯</span>
-                <h3>Уникальность рецептов и технологий ТКМ</h3>
-                <p>Синтез многовекового опыта Китайской народной медицины и передовых биотехнологий. Рецептуры, разработанные академиками, которые недоступны в массовой индустрии.</p>
+            <div class="principles-grid">
+                <article class="principle-card">
+                    <div class="p-number">一</div>
+                    <h3>Заметный и быстрый эффект</h3>
+                    <p>Результат, который вы почувствуете уже после первых сеансов. Мы фокусируемся на реальном улучшении вашего самочувствия, а не на временных иллюзиях.</p>
+                    <div class="p-seal">氣</div>
+                </article>
+                <article class="principle-card">
+                    <div class="p-number">二</div>
+                    <h3>Натуральный состав<br><span class="highlight-98">98%</span> усвоения</h3>
+                    <p>Природа создает, наука совершенствует. Субнанометрическое дробление клеточной мембраны обеспечивает 98% усвоения активных веществ. Безопасно и абсолютно натурально.</p>
+                    <div class="p-seal">和</div>
+                </article>
+                <article class="principle-card">
+                    <div class="p-number">三</div>
+                    <h3>Уникальность технологий ТКМ</h3>
+                    <p>Синтез многовекового опыта Китайской народной медицины и передовых биотехнологий. Рецептуры, разработанные академиками, недоступные в массовой индустрии.</p>
+                    <div class="p-seal">道</div>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- УСЛУГИ -->
-    <section id="services">
-        <div class="section-head">
-            <svg class="brush-stroke brush-anim" viewBox="0 0 120 20" fill="none"><path d="M0 10 C20 0 40 20 60 10 C80 0 100 20 120 10" stroke="#a88a50" stroke-width="2" stroke-linecap="round"/></svg>
-            <h2 class="gsap-reveal">Наши Услуги</h2>
-            <p class="gsap-reveal">Комплексный подход к вашему здоровью с использованием высокотехнологичного оборудования и традиционных практик.</p>
-        </div>
-        <div class="services-grid">
-            <div class="service-card gsap-card"><span class="card-num">01</span><div><h3>Биоэнергомассаж</h3><p>Процедура для расслабления, восстановления и общего самочувствия. от 2 090 ₽</p></div><a href="bioenergy-massage.html">Подробнее →</a></div>
-            <div class="service-card gsap-card"><span class="card-num">02</span><div><h3>Капсула TIM</h3><p>Комфортная процедура с сочетанием теплового и вибрационного режимов. от 1 120 ₽</p></div><a href="tim-fohow.html">Подробнее →</a></div>
-            <div class="service-card gsap-card"><span class="card-num">03</span><div><h3>Массаж лица</h3><p>Уход за кожей, микроцикуляция и снятие отечности. от 840 ₽</p></div><a href="massaj-lica.html">Подробнее →</a></div>
-            <div class="service-card gsap-card"><span class="card-num">04</span><div><h3>Остеопатия</h3><p>Мягкая мануальная коррекция тела. Консультация и лечебные сеансы. от 1 670 ₽</p></div><a href="osteopatiya.html">Подробнее →</a></div>
-            <div class="service-card gsap-card"><span class="card-num">05</span><div><h3>Выезд специалиста</h3><p>Проведение процедур в комфорте вашего дома или отеля. от +1 120 ₽</p></div><a href="viezd-na-dom.html">Подробнее →</a></div>
-            <div class="service-card gsap-card"><span class="card-num">06</span><div><h3>Сертификаты</h3><p>Подарите здоровье и заботу близким. Сертификат на любую сумму.</p></div><a href="sertifikat.html">Подробнее →</a></div>
+    <!-- Услуги -->
+    <section class="section services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <span class="cn">和 · 氣 · 生</span>
+                <h2>Наши Услуги</h2>
+                <p>Комплексный подход к вашему здоровью с использованием высокотехнологичного оборудования и традиционных практик.</p>
+            </div>
+            <div class="services-grid">
+                <article class="service-card"><h3>Биоэнергомассаж</h3><p>Процедура для расслабления, восстановления и общего самочувствия. от 2 090 ₽</p><a href="bioenergy-massage.html">Подробнее →</a></article>
+                <article class="service-card"><h3>Капсула TIM</h3><p>Комфортная процедура с сочетанием теплового и вибрационного режимов. от 1 120 ₽</p><a href="tim-fohow.html">Подробнее →</a></article>
+                <article class="service-card"><h3>Массаж лица</h3><p>Уход за кожей, микроциркуляция и снятие отечности. от 840 ₽</p><a href="massaj-lica.html">Подробнее →</a></article>
+                <article class="service-card"><h3>Остеопатия</h3><p>Мягкая мануальная коррекция тела. Консультация и лечебные сеансы. от 1 670 ₽</p><a href="osteopatiya.html">Подробнее →</a></article>
+                <article class="service-card"><h3>Выезд специалиста</h3><p>Проведение процедур в комфорте вашего дома или отеля. от +1 120 ₽</p><a href="viezd-na-dom.html">Подробнее →</a></article>
+                <article class="service-card"><h3>Сертификаты</h3><p>Подарите здоровье и заботу близким. Сертификат на любую сумму.</p><a href="sertifikat.html">Подробнее →</a></article>
+            </div>
         </div>
     </section>
 
+    <!-- Подвал -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-col"><h4>ЯН-ШЕН</h4><p style="font-style: italic; color: var(--ink-soft);">«Возрождение из пепла»</p><p style="font-size: 0.9rem; margin-top: 10px; color: var(--ink-soft);">Центр здоровья и восстановления</p><p style="font-size: 0.9rem; color: var(--ink-soft);">Сочи, Навагинская, 9</p><a href="tel:+79881434998" style="color: var(--vermillion); font-size: 1rem; font-weight: 500;">+7 988 143 49 98</a></div>
-            <div class="footer-col"><h4>Навигация</h4><ul><li><a href="index.html">Главная</a></li><li><a href="bioenergy-massage.html">Массаж</a></li><li><a href="tim-fohow.html">Капсула TIM</a></li><li><a href="products.html">Продукция</a></li><li><a href="prices.html">Цены</a></li><li><a href="sertifikat.html">Сертификаты</a></li></ul></div>
-            <div class="footer-col"><h4>Информация</h4><ul><li><a href="#">FAQ</a></li><li><a href="#">Акции</a></li><li><a href="#">Контакты</a></li><li><a href="#">Политика конфиденциальности</a></li></ul></div>
+        <div class="container">
+            <div class="footer-inner">
+                <div>
+                    <h3>ЯН-ШЕН</h3>
+                    <p>Центр здоровья и восстановления.</p>
+                    <p>Искусство возрождения.</p>
+                    <p style="margin-top:15px;"><a href="tel:+79881434998" style="color: var(--gold-light); font-size: 20px;">+7 988 143 49 98</a></p>
+                </div>
+                <div>
+                    <h3>Навигация</h3>
+                    <p><a href="index.html">Главная</a></p>
+                    <p><a href="bioenergy-massage.html">Массаж</a></p>
+                    <p><a href="tim-fohow.html">Капсула TIM</a></p>
+                    <p><a href="products.html">Продукция</a></p>
+                    <p><a href="prices.html">Цены</a></p>
+                </div>
+                <div>
+                    <h3>Контакты</h3>
+                    <p>Сочи, Навагинская, 9</p>
+                    <p><a href="https://wa.me/79881434998" target="_blank">Написать в WhatsApp</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">© 2026 ЯН-ШЕН · Искусство возрождения</div>
         </div>
-        <div class="footer-bottom"><p>© 2026 ЯН-ШЕН. Все права защищены.</p><p>Искусство возрождения</p></div>
     </footer>
 
-    <div class="mobile-fixed-bar"><a href="tel:+79881434998" class="mob-call">☎ Позвонить</a><a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20записаться%20на%20процедуру" target="_blank" rel="noopener noreferrer" class="mob-book">Записаться</a></div>
+    <div class="mobile-fixed-bar">
+        <a href="tel:+79881434998" class="mob-call">☎ Позвонить</a>
+        <a href="https://wa.me/79881434998?text=Здравствуйте!%20Хочу%20записаться%20на%20процедуру" target="_blank" class="mob-book">Записаться</a>
+    </div>
 
     <script>
-        tsParticles.load("tsparticles", { fpsLimit: 60, fullScreen: { zIndex: 1 }, particles: { number: { value: 30, density: { enable: true, area: 800 } }, color: { value: ["#a88a50", "#a83227", "#173c35"] }, shape: { type: "circle" }, opacity: { value: 0.15, animation: { enable: true, speed: 1, minimumValue: 0.05, sync: false } }, size: { value: { min: 1, max: 2 } }, move: { enable: true, speed: 0.5, direction: "top", random: true, straight: false, outModes: { default: "out" } } }, interactivity: { events: { onHover: { enable: true, mode: "bubble", parallax: { enable: true, force: 40 } } }, modes: { bubble: { distance: 150, size: 4, duration: 2, opacity: 0.3 } } }, detectRetina: true });
+        // GSAP 3D Параллакс эффект
         gsap.registerPlugin(ScrollTrigger);
-        gsap.utils.toArray(".gsap-reveal").forEach(el => { gsap.from(el, { opacity: 0, y: 50, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 85%" } }); });
-        gsap.utils.toArray(".gsap-card").forEach((el, i) => { gsap.from(el, { opacity: 0, y: 60, duration: 0.8, delay: i * 0.1, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 90%" } }); });
-        gsap.utils.toArray(".brush-anim path").forEach(path => { const length = path.getTotalLength(); gsap.set(path, { strokeDasharray: length, strokeDashoffset: length }); gsap.to(path, { strokeDashoffset: 0, duration: 1.5, ease: "power1.inOut", scrollTrigger: { trigger: path, start: "top 90%" } }); });
-        gsap.to("#mountains", { y: -100, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
-        gsap.to("#bamboo-left", { y: 150, ease: "none", scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: true } });
-        gsap.to("#bamboo-right", { y: 150, ease: "none", scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: true } });
+
+        // Движение иероглифов при скролле
+        gsap.to("#char-left", { y: 200, x: -50, scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 2 } });
+        gsap.to("#char-right", { y: -150, x: 50, scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 2 } });
+        
+        // Движение гор (уезжают вниз)
+        gsap.to("#mountains", { y: 100, scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1 } });
+
+        // Движение печати (уезжает вверх)
+        gsap.to(".seal", { y: -80, scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1 } });
+
+        // Анимация появления карточек
+        gsap.utils.toArray(".principle-card, .service-card").forEach((el, i) => {
+            gsap.from(el, { 
+                opacity: 0, 
+                y: 50, 
+                duration: 0.8, 
+                delay: i * 0.1, 
+                ease: "power2.out", 
+                scrollTrigger: { trigger: el, start: "top 85%" } 
+            });
+        });
     </script>
 </body>
 </html>
